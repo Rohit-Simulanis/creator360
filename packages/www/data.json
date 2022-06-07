@@ -1,0 +1,38 @@
+{
+    "data": [
+        {
+            "id": 13,
+            "background": "1582717246157.jpg",
+            "backgroundtype": "img",
+            "hotspot": [
+                {
+                    "x": -181.25,
+                    "y": -4950.71,
+                    "z": -652.94,
+                    "img": "",
+                    "trigger": 1
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "background": "1583312819764.jpg",
+            "backgroundtype": "img",
+            "hotspot": [
+                {
+                    "x": -181.25,
+                    "y": -4950.71,
+                    "z": -652.94,
+                    "img": "",
+                    "trigger": 1
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "background": "1583312819764.jpg",
+            "backgroundtype": "img",
+            "hotspot": []
+        }
+    ]
+}

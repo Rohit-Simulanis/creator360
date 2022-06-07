@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video-Editor</title>
+    <link href="/stylesheets/demo.css" rel="stylesheet" />
+    <link href="/stylesheets/main.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- App start -->
+    
+    <!-- loader -->
+    <div class="loader">
+        <div class="spinner-box">
+            <div class="circle-border">
+            <div class="circle-core"></div>
+            </div>  
+        </div>
+    </div>
+
+        <!-- header -->
+        <header class="app_name" role="file-name">
+            <p><%= project_name %></p>
+            <a href="/projects"><span>Back</span></a>
+        </header>
+
+
+        <!-- Video Pannel -->
+        <div class="vid-content-container" role="video-content-container">
+            <div class="content-pannel" role="video-info-holder">
+                <div class="v_top-bar">
+                    <div class="v-icon">
+                        <svg stroke-width="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20,5h-8.586L9.707,3.293C9.52,3.105,9.265,3,9,3H4C2.897,3,2,3.897,2,5v14c0,1.103,0.897,2,2,2h16c1.103,0,2-0.897,2-2V7 C22,5.897,21.103,5,20,5z M4,19V7h7h1h8l0.002,12H4z"></path></svg>
+                        <p class="">Media</p>
+                    </div>
+                    <button class="btn popUp">Dummy popUp btn</button>
+                    <button class="btn expBtn">Export</button>
+                </div>
+
+                <div class="v_inner-content">
+                    <div class="project_folder">
+                        <div class="v_project-nav">
+                            <a href="javascript:void(0)">
+                                <!-- <span class="drop-arrow v-icon">
+                                    <svg stroke-width="0" viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg"><path d="M9 19L17 12 9 5z"></path></svg>
+                                </span> -->
+
+                                <span class="v-icon link-item">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 8"><defs></defs><title>vid</title><polygon class="cls-1" points="11.5 1.5 8 4 11.5 6.5 11.5 1.5"/><rect class="cls-1" x="0.5" y="0.5" width="7.5" height="7" rx="1"/></svg>
+                                    <!-- <svg stroke-width="0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20,5h-8.586L9.707,3.293C9.52,3.105,9.265,3,9,3H4C2.897,3,2,3.897,2,5v14c0,1.103,0.897,2,2,2h16c1.103,0,2-0.897,2-2V7 C22,5.897,21.103,5,20,5z M4,19V7h7h1h8l0.002,12H4z"></path></svg>  -->
+
+                                    Project File
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="v_media-container">
+                        <!-- <div class="v_search">
+                            <form>
+                                <div class="search-holder">
+                                    <input type="text" placeholder="Search" id="" name="" />
+                                    <svg fill="#eee" stroke-width="0" viewBox="0 0 24 24" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg"><path d="M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z"></path></svg>
+                                </div>
+                            </form>
+                        </div> -->
+
+                        <!-- NO FILE -->
+
+                        <div class="v_no-file" style="display: none;">
+                            <svg  viewBox="-31 0 512 512"  xmlns="http://www.w3.org/2000/svg"><g fill-rule="evenodd"><path d="m440.589844 206.675781h-341.171875l327.699219-94.929687c2.546874-.738282 4.695312-2.460938 5.976562-4.78125 1.28125-2.324219 1.585938-5.058594.847656-7.605469l-17.148437-59.199219c-6.851563-23.644531-28.867188-40.160156-53.539063-40.160156-5.199218 0-10.378906.738281-15.402344 2.191406l-307.675781 89.128906c-14.230469 4.121094-26.023437 13.582032-33.214843 26.632813-7.1875 13.050781-8.875 28.078125-4.753907 42.304687l16.753907 57.835938v238.253906c0 30.6875 24.964843 55.652344 55.648437 55.652344h120.164063c5.523437 0 10-4.476562 10-10s-4.476563-10-10-10h-120.160157c-19.660156 0-35.652343-15.992188-35.652343-35.652344v-136.085937h51.230468.023438.019531 78.3125.023437.023438 78.3125.023438.023437 78.3125.023437.019532 105.28125v136.085937c0 19.660156-15.992188 35.652344-35.652344 35.652344h-120.164062c-5.519532 0-10 4.476562-10 10s4.480468 10 10 10h120.164062c30.6875 0 55.652344-24.964844 55.652344-55.652344v-239.671875c0-5.523437-4.476563-10-10-10zm-176.332032 93.585938 42.488282-73.585938h55.261718l-42.484374 73.585938zm-78.359374 0 42.488281-73.585938h55.261719l-42.484376 73.585938zm-78.355469 0 42.484375-73.585938h55.265625l-42.488281 73.585938zm37.179687-129.457031-71.148437-68.335938 53.308593-15.441406c.375.546875.8125 1.0625 1.3125 1.542968l71.148438 68.335938-53.308594 15.441406c-.375-.546875-.816406-1.066406-1.3125-1.542968zm134-125.839844 71.148438 68.335937-53.308594 15.441407c-.375-.546876-.8125-1.066407-1.3125-1.542969l-71.148438-68.335938 53.308594-15.441406c.375.546875.8125 1.0625 1.3125 1.542969zm-75.265625 21.804687 71.148438 68.332031-53.308594 15.445313c-.375-.546875-.8125-1.066406-1.3125-1.542969l-71.148437-68.335937 53.308593-15.441407c.378907.542969.816407 1.0625 1.3125 1.542969zm149.960938-45.367187c3.210937-.929688 6.519531-1.402344 9.835937-1.402344 15.824219 0 29.9375 10.578125 34.328125 25.726562l14.367188 49.589844-40.121094 11.621094c-.378906-.546875-.816406-1.0625-1.316406-1.542969l-71.144531-68.332031zm-328.9375 106.199218c4.609375-8.371093 12.160156-14.433593 21.261719-17.070312l5.875-1.703125c.378906.546875.816406 1.066406 1.3125 1.542969l71.148437 68.335937-88.292969 25.578125-14.367187-49.589844c-2.636719-9.097656-1.546875-18.71875 3.0625-27.09375zm14.480469 99.074219h87.972656l-42.484375 73.585938h-45.488281zm303.65625 73.585938 42.484374-73.585938h45.488282v73.585938zm0 0"/><path d="m303.921875 405.113281c0-3.574219-1.90625-6.875-5-8.660156l-87.855469-50.722656c-3.09375-1.785157-6.90625-1.785157-10 0-3.09375 1.785156-5 5.085937-5 8.660156v101.445313c0 3.570312 1.90625 6.871093 5 8.65625 1.546875.894531 3.273438 1.34375 5 1.34375 1.726563 0 3.453125-.449219 5-1.34375l87.855469-50.71875c3.09375-1.785157 5-5.085938 5-8.660157zm-87.855469 33.402344v-66.804687l57.855469 33.402343zm0 0"/><path d="m234.773438 492c-5.507813 0-10 4.492188-10 10s4.492187 10 10 10c5.511718 0 10-4.492188 10-10s-4.488282-10-10-10zm0 0"/></g></svg>
+
+                            <p>Drop your video clips, images, or audio here. <br/>
+                                or, click here to import media.</p>
+                        </div>
+
+                        <!-- Media files -->
+                        <div class="media-files">
+                            <ul>
+                                <%
+                                    if(data.length>0){
+                                        data.forEach(function(element, index) {
+                                %>
+                                    <li>
+                                        <div class="v_item">
+                                            <video width="320" height="240" controls id="makeMeDraggable" >
+                                              <source src="/uploads/projectsinventory/<%= element.filename %>" type="video/mp4">
+                                            </video>
+                                            <!--<img src="/uploads/projectsinventory/<%= element.filename %>" alt="" />-->
+                                            <span role="video-name"><%= element.original_filename %></span>
+                                            <!--<div class="v_btn">-->
+                                            <!--    <button type="button">-->
+                                            <!--        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M17.004 20L17.003 8h-1-8-1v12H17.004zM13.003 10h2v8h-2V10zM9.003 10h2v8h-2V10zM9.003 4H15.003V6H9.003z"></path><path d="M5.003,20c0,1.103,0.897,2,2,2h10c1.103,0,2-0.897,2-2V8h2V6h-3h-1V4c0-1.103-0.897-2-2-2h-6c-1.103,0-2,0.897-2,2v2h-1h-3 v2h2V20z M9.003,4h6v2h-6V4z M8.003,8h8h1l0.001,12H7.003V8H8.003z"></path><path d="M9.003 10H11.003V18H9.003zM13.003 10H15.003V18H13.003z"></path></svg>-->
+                                            <!--    </button>-->
+                                            <!--</div>-->
+                                        </div>
+                                    </li>
+                                <%
+                                    });
+                                    } else{
+                                        %>
+                                        <div class="v_item">
+                                            No video found.
+                                        </div>
+                                        <%
+                                    }
+                                %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="vid-pannel" role="video-player-holder">
+
+                <div id="container">
+                    <video
+                      controls
+                      crossorigin
+                      playsinline
+                      data-poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
+                      id="player"
+                    >
+                      <!-- Video files -->
+                      <source
+                        src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
+                        type="video/mp4"
+                        size="576"
+                      />
+                      <source
+                        src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-720p.mp4"
+                        type="video/mp4"
+                        size="720"
+                      />
+                      <source
+                        src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-1080p.mp4"
+                        type="video/mp4"
+                        size="1080"
+                      />
+          
+                      <!-- Caption files -->
+                      <track
+                        kind="captions"
+                        label="English"
+                        srclang="en"
+                        src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.en.vtt"
+                        default
+                      />
+                      <track
+                        kind="captions"
+                        label="Français"
+                        srclang="fr"
+                        src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.fr.vtt"
+                      />
+          
+                      <!-- Fallback for browsers that don't support the <video> element -->
+                      <a href="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4" download>Download</a>
+                    </video>
+                  </div>
+          
+
+            </div>
+        </div>
+
+        <!-- video edit function -->
+        <div class="v_function-bar">
+            <div class="v_editor-menu">
+                <div class="menu">
+                    <button type="button" title="Undo">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 426.67"><path d="M213.33,149.38V58.67A16,16,0,0,0,186.2,47.19L4.86,223.19a16,16,0,0,0,0,22.95l181.34,176a16,16,0,0,0,27.13-11.47V320h30.25A272,272,0,0,1,481.51,460.2l.45.81a16,16,0,0,0,30-7.68C512,287.49,378.52,152.23,213.33,149.38Z" transform="translate(0 -42.66)"/></svg>
+                    </button>
+                    <button type="button" title="Redo">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 426.67"><title>1933011</title><path d="M0,453.33A16,16,0,0,0,30,461l.45-.81A272,272,0,0,1,268.42,320h30.25v90.67a16,16,0,0,0,27.13,11.47l181.34-176a16,16,0,0,0,0-22.95L325.8,47.19a16,16,0,0,0-27.13,11.48v90.71C133.48,152.23,0,287.49,0,453.33Z" transform="translate(0 -42.66)"/></svg>
+                    </button>
+                    
+                    <button type="button" title="Split">
+                        <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M308 277.2c25.5-33 80.5-111.5 90.2-135.4 7.2-17.6 10.6-32.8 10.4-46.2-.2-17.9-6-29.3-18.3-40.6-5.2-4.8-13.5-6.9-20-6.9L255.9 201.7l-10 13.4-2.9 3.9-.1.1-14.5 19.7c-.1.1-.2.3-.3.4-.5.8-7.5 10.9-15.2 22.7-3 4.6-6.1 9.5-9 14.1-3.5 5.6-6.6 11-8.8 15.2-3.6 7.1-7.3 14.4-10.7 21.5-3.7 7.5-7.2 14.6-10.4 20.7-10.2-7.3-22-11.1-34.3-11.1-17.5 0-33.7 7.7-45.8 21.6C82.4 357.1 76 374.6 76 393.1c0 18.5 6.4 36 17.9 49.3 12.1 13.9 28.4 21.6 45.8 21.6 14.4 0 28-5.2 39.2-15 10.5-9.1 18-21.3 21.8-35.4 1-3.1 11.6-34.7 26.1-57.3 9.2-14.4 22.2-23.4 29.6-27.8l13.5-9.7c0 .1 12.7-8.7 38.1-41.6zM139.9 421.1c-13.3 0-24-12.6-24-28s10.7-28 24-28 24 12.6 24 28c0 15.5-10.8 28-24 28zm116.2-132.9c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16-7.2 16-16 16z"></path><path d="M191.5 260.4c.7 1 1.6 1.9 2.5 2.7 1.7-2.8 3.6-5.7 5.4-8.6l46.5-65.8L140.9 48c-8.9 0-14.4.9-18.5 3.9-11.9 8.9-19.1 25.6-19.3 43.6-.2 13.5 3.3 28.6 10.4 46.2 8.6 21 42.6 70.2 78 118.7zM372 322.3c-12.3 0-24.1 3.8-34.3 11.1-3.2-6.1-6.7-13.2-10.4-20.7-3.4-6.9-6.9-14-10.4-20.8L306 305.8l-36.4 33.1c5.2 4.6 10.7 10.4 15.3 17.5 14.5 22.6 25 54.2 26 57.3 3.8 14.1 11.3 26.3 21.8 35.4 11.3 9.8 24.9 15 39.2 15 35.3 0 64-31.8 64-70.9s-28.6-70.9-63.9-70.9zm.1 98.8c-13.3 0-24-12.6-24-28s10.7-28 24-28 24 12.6 24 28c0 15.5-10.7 28-24 28z"></path></svg>
+                    </button>
+
+                    <button type="button" title="Delete">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M17.004 20L17.003 8h-1-8-1v12H17.004zM13.003 10h2v8h-2V10zM9.003 10h2v8h-2V10zM9.003 4H15.003V6H9.003z"></path><path d="M5.003,20c0,1.103,0.897,2,2,2h10c1.103,0,2-0.897,2-2V8h2V6h-3h-1V4c0-1.103-0.897-2-2-2h-6c-1.103,0-2,0.897-2,2v2h-1h-3 v2h2V20z M9.003,4h6v2h-6V4z M8.003,8h8h1l0.001,12H7.003V8H8.003z"></path><path d="M9.003 10H11.003V18H9.003zM13.003 10H15.003V18H13.003z"></path></svg>
+                    </button>
+
+                    <button type="button" title="Setting">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 368 368"><path d="M344,144H314.05a135.22,135.22,0,0,0-9.79-23.66l21.16-21.16a24,24,0,0,0,0-34L302.78,42.58c-9-9-24.89-9.08-34,0L247.66,63.74A134.94,134.94,0,0,0,224,53.94V24A24,24,0,0,0,200,0H168a24,24,0,0,0-24,24V54a136,136,0,0,0-23.66,9.79L99.17,42.58a24,24,0,0,0-33.95,0L42.57,65.22a24.06,24.06,0,0,0,0,34l21.16,21.16A136.09,136.09,0,0,0,53.94,144H24A24,24,0,0,0,0,168v32a24,24,0,0,0,24,24H54a136,136,0,0,0,9.79,23.66L42.58,268.83a24,24,0,0,0,0,33.95l22.64,22.65a24.06,24.06,0,0,0,34,0l21.16-21.16A136.09,136.09,0,0,0,144,314.06V344a24,24,0,0,0,24,24h32a24,24,0,0,0,24-24V314.05a135.67,135.67,0,0,0,23.66-9.79l21.16,21.16c9.07,9.07,24.91,9.05,33.95,0l22.64-22.64a24,24,0,0,0,0-33.95l-21.16-21.17a134.94,134.94,0,0,0,9.8-23.66H344a24,24,0,0,0,24-24V168A24,24,0,0,0,344,144Zm8,56a8,8,0,0,1-8,8H308a8,8,0,0,0-7.74,6,120.63,120.63,0,0,1-12.84,31,8,8,0,0,0,1.24,9.72l25.44,25.44a8.05,8.05,0,0,1,0,11.33l-22.64,22.64a8.24,8.24,0,0,1-11.33,0l-25.44-25.44a8,8,0,0,0-9.73-1.23,119.72,119.72,0,0,1-31,12.82,8,8,0,0,0-6,7.74v36a8,8,0,0,1-8,8H168a8,8,0,0,1-8-8V308a8,8,0,0,0-6-7.74,120.25,120.25,0,0,1-31-12.83,7.91,7.91,0,0,0-4.06-1.11,8,8,0,0,0-5.66,2.34L87.86,314.1a8,8,0,0,1-11.33,0L53.89,291.46a8,8,0,0,1,0-11.32L79.33,254.7A8,8,0,0,0,80.56,245a120.08,120.08,0,0,1-12.82-31A8,8,0,0,0,60,208H24a8,8,0,0,1-8-8V168a8,8,0,0,1,8-8H60a8,8,0,0,0,7.74-6,120.25,120.25,0,0,1,12.83-31,8,8,0,0,0-1.23-9.72L53.9,87.86a8,8,0,0,1,0-11.32L76.54,53.9a8,8,0,0,1,11.32,0L113.3,79.34A8,8,0,0,0,123,80.57a120.45,120.45,0,0,1,31-12.83A8,8,0,0,0,160,60V24a8,8,0,0,1,8-8h32a8,8,0,0,1,8,8V60a8,8,0,0,0,6,7.74,120.09,120.09,0,0,1,31,12.83,8,8,0,0,0,9.73-1.23L280.14,53.9a8.19,8.19,0,0,1,11.32,0L314.1,76.54a8,8,0,0,1,0,11.32L288.66,113.3a8,8,0,0,0-1.23,9.72,120.1,120.1,0,0,1,12.83,31,8,8,0,0,0,7.74,6h36a8,8,0,0,1,8,8Z"/><path d="M184,112a72,72,0,1,0,72,72A72.08,72.08,0,0,0,184,112Zm0,128a56,56,0,1,1,56-56A56.06,56.06,0,0,1,184,240Z"/></svg>
+                    </button>
+                    <!-- <button type="button">
+                        <svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456.56 447.55"><title>70115</title><path d="M97.56,79.44H13.43a13.43,13.43,0,1,1,0-26.85H97.56a13.43,13.43,0,1,1,0,26.85Z" transform="translate(0 -4.5)"/><path d="M145.64,127.52A61.51,61.51,0,1,1,207.15,66,61.57,61.57,0,0,1,145.64,127.52Zm0-96.16A34.65,34.65,0,1,0,180.29,66,34.7,34.7,0,0,0,145.64,31.36Z" transform="translate(0 -4.5)"/><path d="M443.13,79.44H242.43a13.43,13.43,0,0,1,0-26.85h200.7a13.43,13.43,0,1,1,0,26.85Z" transform="translate(0 -4.5)"/><path d="M325.94,289.78a61.51,61.51,0,1,1,61.5-61.5A61.57,61.57,0,0,1,325.94,289.78Zm0-96.15a34.65,34.65,0,1,0,34.65,34.65A34.68,34.68,0,0,0,325.94,193.63Z" transform="translate(0 -4.5)"/><path d="M229.15,241.71H13.43a13.43,13.43,0,0,1,0-26.86H229.15a13.43,13.43,0,0,1,0,26.86Z" transform="translate(0 -4.5)"/><path d="M443.13,241.71H374a13.43,13.43,0,0,1,0-26.86h69.12a13.43,13.43,0,1,1,0,26.86Z" transform="translate(0 -4.5)"/><path d="M130.62,452.05a61.51,61.51,0,1,1,61.51-61.51A61.58,61.58,0,0,1,130.62,452.05Zm0-96.16a34.66,34.66,0,1,0,34.65,34.65A34.68,34.68,0,0,0,130.62,355.89Z" transform="translate(0 -4.5)"/><path d="M443.13,404H227.41a13.43,13.43,0,0,1,0-26.86H443.13a13.43,13.43,0,1,1,0,26.86Z" transform="translate(0 -4.5)"/><path d="M82.54,404H13.43a13.43,13.43,0,1,1,0-26.86H82.54a13.43,13.43,0,0,1,0,26.86Z" transform="translate(0 -4.5)"/></svg>
+                    </button> -->
+                </div>
+            </div>
+
+            <div class="ruler-function">
+                <div class="menu">
+                    <button type="button">
+                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        <span>Zoom In</span>
+                    </button>
+
+                    <button type="button">
+                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                        <span>Zoom out</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div ondrop="drop(event)" ondragover="allowDrop(event)">sfsdfsf</div>
+        
+        <!-- Media export -->
+
+        <div class="v_popup">
+            <div class="container">
+            <div class="v_confirmation">
+                <button type="button" class="close" role="close">
+                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="25px" width="25px" xmlns="http://www.w3.org/2000/svg"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+
+                <div class="v_modal-body">
+                    <p>The project has been modified. Do you want to save the chnages?</p>
+
+                    <div class="btn-container">
+                        <button type="button" class="btn">Yes</button>
+                        <button type="button" class="btn btn-outline">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- export media file -->
+        <div class="export_media" >
+            <div class="container">
+            <div id="titlebar"><h2>Export media</h2></div>
+            <p class="file">Project_Honeywell-1256.mp4</p>
+            <progress id="bar" value="0" max="100" ng-model="prog"></progress>
+            <button type="button" class="btn expCancel">Cancel</button>
+        </div>
+          </div>
+
+        <script src="https://cdn.plyr.io/3.6.2/demo.js"></script>
+
+
+        <script>
+            let popUp = document.querySelector('.popUp');
+            let v_popup = document.querySelector('.v_popup');
+            let v_close = document.querySelector('.close');
+            let expBtn = document.querySelector('.expBtn');
+            let expCancel = document.querySelector('.expCancel');
+            let export_media = document.querySelector('.export_media');
+
+
+            //confirmation
+            popUp.addEventListener('click', function(){
+                v_popup.classList.toggle('v-show');
+            })
+
+            v_close.addEventListener('click', function(){
+                v_popup.classList.remove('v-show');
+            });
+
+
+            //export popup
+            expBtn.addEventListener('click', function(){
+                export_media.classList.toggle('v-show');
+            })
+
+            expCancel.addEventListener('click', function(){
+                export_media.classList.remove('v-show');
+            });
+
+        </script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+        <script type="text/javascript">
+            
+
+            $( init );
+
+            function init() {
+              $('#makeMeDraggable').draggable();
+            }
+
+
+        </script>
+</body>
+</html>

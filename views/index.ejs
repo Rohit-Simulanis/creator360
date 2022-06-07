@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <%- include('partials/header') %>
+</head>
+<body>
+      <!--login-->
+<div class="login-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+            <div class="col-md-7 p-0">
+                <div class="login-banner">
+            <img src="images/energy-distribution.jpg" alt="">
+                    </div>
+            </div> 
+            <div class="col-md-5 p-0">
+
+                <div class="login-set"> 
+                <div id="login">
+                     <!-- <a onclick="shell()" class="btn btn-success">Test Shell</a> -->
+                <div class="text-center">
+                    <img src="images/Simulanis-Logo.svg" alt="logo">
+                    <h5 class="mt-2 txt-orange">Make your VR apps in minutes!</h5>
+                </div>
+                <form class="mt-3" action="/loginAdmin" method="post" id="loginForm"> 
+                    <div class="form-group input-icon">
+                        <span>
+                            <i class="dripicons-mail"></i>
+                        </span>
+                       <input class="form-control" type="text" name="email" placeholder="E-mail Address" >
+                    </div>
+
+                    <div class="form-group input-icon">
+                        <span>
+                            <i class="dripicons-lock"></i>
+                        </span>
+                        <input class="form-control" type="password" name="password" placeholder="Password" >   
+                    </div>
+                    <div>
+                        <a href="#" class="text-right d-block f-pass">Forgot password <i class="dripicons-question"></i></a>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-purple waves-effect waves-light"><i class="mdi mdi-login mr-2"></i>Log In</button>
+                        </div>
+                    </div>
+                    <div class="d-v-center justify-content-between mt-4">                    
+                    <!-- <img src="images/rpsg-logo.png" alt="rpsg-logo" width="80px"> -->
+                        <div>
+                            <a href="https://simulanis.com">
+                                <span class="d-flex justify-content-end">
+                                    <img src="images/Simulanis-Logo.svg" width="100px">
+                                </span>                                
+                        <h6><small>Powered by Simulanis Solutions Pvt. Ltd.</small></h6></a>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                    
+                    
+                    <div id="forget">
+                <div class="text-center">
+                    <img src="images/Simulanis-Logo.svg" alt="logo">
+                    <h5 class="mt-2 txt-orange">Forget your password?</h5>
+                    <p>Don't worry. <br>Resetting your password is easy. just tell us the email address you registred with.</p>
+                </div>
+                <form class="mt-3" action="/forget-password" method="post" id="forget-password"> 
+                    
+                    <div class="form-group input-icon">
+                        <span>
+                            <i class="dripicons-mail"></i>
+                        </span>
+                       <input class="form-control" type="text" name="email" placeholder="E-mail Address" >
+                        
+                    </div>
+                    <div class="text-center">
+                        <a href="#" class="text-right d-block l-div">Login with account</a>
+                    </div>
+                    <div>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-purple waves-effect waves-light"><i class="mdi mdi-textbox-password mr-2"></i>Reset Password</button>
+                        </div>
+                    </div>
+                    <div class="d-v-center justify-content-between mt-4">                    
+                    <img src="images/rpsg-logo.png" alt="rpsg-logo" width="80px">
+                        <div>
+                            <a href="https://simulanis.com">
+                                <span class="d-flex justify-content-end">
+                                    <img src="images/Simulanis-Logo.svg" width="100px">
+                                </span>                                
+                        <h6><small>Powered by Simulanis Solutions Pvt. Ltd.</small></h6></a>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                </div>
+                </div>
+            </div>
+    </div>
+    </div>
+    <!-- jQuery  -->
+    <%- include('partials/footer') %>
+    
+    <!--custom-js-->
+<script>
+        
+        
+            // toastr.error('Path already exists and is not empty: D:/Projects/NODE Projects/NPCL/projects/project_id_3');
+        
+    </script> 
+<script>
+    // Initialize tooltip component
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    // Initialize popover component
+    $(function() {
+        $('[data-toggle="popover"]').popover()
+    })
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#projectAdd').validate({ // initialize the plugin
+            rules: {
+                projectName: {
+                    required: true,
+                },
+                version: {
+                    required: true,
+                }
+            },
+            messages: {
+                projectName: {
+                    required: "Project Name is required. <i class='icon-info icons'></i>",
+                },
+                version: {
+                    required: "Version is required.  <i class='icon-info icons'></i>",
+                }
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#loginForm').validate({ // initialize the plugin
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                },
+            },
+            messages: {
+                email: {
+                    required: "Email is required.  <i class='icon-info icons'></i>",
+                    email: "Email must be a valid email-id.  <i class='icon-info icons'></i>"
+                },
+                password: {
+                    required: "Password is required.  <i class='icon-info icons'></i>",
+                },
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#forget-password').validate({ // initialize the plugin
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                }
+            },
+            messages: {
+                email: {
+                    required: "Email is required.  <i class='icon-info icons'></i>",
+                    email: "Email must be a valid email-id.  <i class='icon-info icons'></i>"
+                }
+            }
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#forget").hide();
+        $(".f-pass").click(function(){
+            $("#login").hide();
+            $("#forget").show();
+        });
+        $(".l-div").click(function(){
+            $("#login").show();
+            $("#forget").hide();
+        });
+    });
+</script>
+<script type="text/javascript">
+    function shell()
+    {
+        $.ajax({
+              url: '/projects/shell',
+              type: 'GET',
+             
+              success: function(res)
+              {
+                if(res.msg=='Success')
+                {
+                    console.log(res.data)
+                } else if(res.msg=='Error') {
+                    console.log(res.data)
+                }
+              }
+        });
+    }
+    
+</script>
+</body>
+</html>

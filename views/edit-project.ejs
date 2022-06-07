@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+   <%- include('partials/header') %>
+   <body>
+       
+      <!-- Top Bar Start -->
+      <div class="topbar">
+         <!-- LOGO -->
+         <%- include('partials/top-bar') %>
+         <!--end logo-->
+         </div>
+      <!-- Top Bar End -->
+      <div class="page-wrapper">
+         <!-- Left Sidenav -->
+         <%- include('partials/side-bar') %>
+         <!-- end left-sidenav-->
+        <!-- Page Content-->
+        <div class="page-content">
+            <div class="container-fluid">
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="float-right">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active">Edit Project</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Edit Project</h4>
+                        </div>
+                        <!--end page-title-box-->
+                    </div>
+                    <!--end col-->
+                </div>
+                <!--end row-->
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-v-center justify-content-between">
+                                    <h3 class="mt-0">Edit Project</h3>
+                                    <a href="/projects" class="btn btn-danger waves-effect m-l-5">Back</a>
+                                </div>
+                                <% if (messages.validationError) { %>
+                                    <ul class="text-left" style="color:red;">
+                                    <% for(var i = 0; i < messages.validationError.length; i++){ %>
+                                        <li style="list-style: none;color:red;"> <%= messages.validationError[i].msg %> </li>
+                                    <% } %>
+                                    </ul>
+                                <% } %>
+                                <form class="form-parsley" action="/projects/update-project" method="post" id="edit-project">
+                                    <input type="hidden" name="projectId" value="<%= data.id %>">
+                                    <input type="hidden" name="userId" value="<%= login_id %>">
+                                    <input type="hidden" name="user_type" value="<%= login_user_type %>">
+                                    <div class="form-group">
+                                        <label>Project Name*</label> 
+                                        <input class="form-control" type="text" name="projectName" placeholder="Project Name" value="<%= data.projectName %>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Version*</label> 
+                                        <input class="form-control" type="text" name="version" value="<%= data.version %>" placeholder="Version" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Status</label> 
+                                        <input name="status" value="1" type="checkbox" <%=( data.status=='1')? 'checked': ''; %>/>
+                                    </div>
+                                    <div class="form-group mb-0"><button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button> </div>
+                                    <!--end form-group-->
+                                </form>
+                                <!--end form-->
+                            </div>
+                            <!--end card-body-->
+                        </div>
+                        <!--end card-->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- container -->
+            <%- include('partials/footer') %>
+            <!--end footer-->
+         </div>
+         <!-- end page content -->
+      </div>
+      <!-- end page-wrapper -->
+      <script type="text/javascript">
+        $(document).ready(function () {
+            $('#edit-project').validate({ // initialize the plugin
+                rules: {
+                    projectName: {
+                        required: true,
+                    },
+                    version: {
+                        required: true,
+                    }
+                    
+                },
+                messages: {
+                    projectName: {
+                        required: "Project Name field is required. <i class='icon-info icons'></i>",
+                    },
+                    version: {
+                        required: "Version field is required. <i class='icon-info icons'></i>",
+                    }
+                }
+            });
+        });
+    </script>
+   </body>
+</html>

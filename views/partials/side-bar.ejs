@@ -1,0 +1,53 @@
+<div class="left-sidenav"> 
+   <div class="main-icon-menu">
+      <nav class="nav">
+        <% if(login_user_type=='1') 
+        { 
+        %>
+         <a href="/dashboard" class="nav-link" data-toggle="tooltip-custom" data-placement="top" title="" data-original-title="Dashboard">
+            <span class="ti-layout-grid2 typ1"></span>
+         </a>
+         <!--end MetricaAnalytic--> 
+         <a href="/users" class="nav-link" data-toggle="tooltip-custom" data-placement="top" title="" data-original-title="User">
+            <span class="ti-user typ1"></span>
+         </a>
+         <!--end MetricaCrypto--> 
+         <a href="/projects" class="nav-link" data-toggle="tooltip-custom" data-placement="top" title="" data-original-title="Projects">
+            <span class="ti-layout-tab typ1"></span>
+         </a>
+         <!--end MetricaProject--> 
+         <!-- <a href="#" class="nav-link" data-toggle="tooltip-custom" data-placement="top" title="" data-original-title="Report">
+             <span class="ti-bar-chart-alt typ1"></span>
+         </a> -->
+         <!--end MetricaAnalytic--> 
+         <a href="/users/login-history" class="nav-link" data-toggle="tooltip-custom" data-placement="top" title="" data-original-title="User">
+            <span class="ti-time typ1"></span>
+         </a>
+         <a href="/licenses" class="nav-link" data-toggle="tooltip-custom" data-placement="top" title="" data-original-title="License">
+            <span class="ti-ink-pen typ1"></span>
+         </a>
+         <% 
+         }
+         else 
+         {
+        %>
+          
+         <a href="/projects" class="nav-link" data-toggle="tooltip-custom" data-placement="top" title="" data-original-title="Branding">
+             <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 316.47 339.07"><title>projects</title><path d="M16.77,5.46V344.54H333.23V5.46ZM321.93,333.23H28.07V62H321.93ZM28.07,50.67V16.77H321.93V50.67Z" transform="translate(-16.77 -5.46)" /><rect x="22.6" y="22.6" width="11.3" height="11.3" /><rect x="45.21" y="22.6" width="11.3" height="11.3" /><rect x="67.81" y="22.6" width="11.3" height="11.3" /><path d="M152.4,118.49H99.84l-5.65-17H50.67V186.3H152.4ZM141.09,175H62V112.84h24.3l5.65,17h49.17Z" transform="translate(-16.77 -5.46)" /><path d="M299.33,118.49H246.77l-5.65-17H197.6V186.3H299.33ZM288,175H208.91V112.84h24.3l5.65,17H288Z" transform="translate(-16.77 -5.46)" /><path d="M152.4,225.86H99.84l-5.65-17H50.67v84.77H152.4Zm-11.3,56.51H62V220.21h24.3l5.65,17h49.17Z" transform="translate(-16.77 -5.46)" /><path d="M299.33,225.86H246.77l-5.65-17H197.6v84.77H299.33ZM288,282.37H208.91V220.21h24.3l5.65,17H288Z" transform="translate(-16.77 -5.46)" /></svg>
+             <span>Projects</span>
+         </a>
+          
+         <a href="/projects/deployment" class="nav-link" data-toggle="tooltip-custom" data-placement="top" title="" data-original-title="Deployement">
+         <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330.29 299.12"><title>deploy</title><path d="M217.56,291,173.8,310.85V162.22l124.69-56.56v66.88a6.19,6.19,0,1,0,12.39,0V96.16h0V94.51c0-.41-.41-.41-.41-.83v-.41a.89.89,0,0,0-.83-.83h0c-.41-.41-.83-.83-1.24-.83H308a1.44,1.44,0,0,0-.83-.41L163.89,28a5.26,5.26,0,0,0-5,0L15.67,90.38c-.41,0-.41.41-.83.41h-.41c-.41.41-.83.41-1.24.83V92c-.41.41-.41.41-.41.83a.4.4,0,0,1-.41.41c0,.41-.41.41-.41.83v1.65h0V247.27a5.53,5.53,0,0,0,3.3,5.37l149.46,73.08c.41,0,.41,0,.83.41H166c.41,0,1.24.41,1.65.41a3.12,3.12,0,0,0,1.65-.41h.83l52.43-23.95c3.3-1.24,4.54-5,2.89-8.26C224.17,291,220.45,289.38,217.56,291ZM33.84,96.16l67.3-29.31L225,125.47l-57.39,26ZM161.41,40.42l128,55.74-49.54,22.71L116.41,60.24ZM24.34,105.24l137.07,57V310L24.34,243.55Z" transform="translate(-11.95 -27.41)" /><path d="M276.6,179.56A65.81,65.81,0,0,0,211,245.2c0,35.92,29.73,65.65,65.65,65.65a65.65,65.65,0,0,0,0-131.29Zm0,119.32a53.26,53.26,0,1,1,53.26-53.26A53.39,53.39,0,0,1,276.6,298.87Z" transform="translate(-11.95 -27.41)" /><path d="M304.68,225l-33.44,36.74L248.53,239a6.13,6.13,0,1,0-8.67,8.67l27.25,27.25a6.21,6.21,0,0,0,4.54,1.65h0a6.63,6.63,0,0,0,4.54-2.06l38-41.7a6,6,0,0,0-.41-8.67C310.87,222.49,306.74,222.49,304.68,225Z" transform="translate(-11.95 -27.41)" /></svg>
+         <span>Deploy</span></a>
+         <!-- <a href="/projects/downloads" class="nav-link" data-toggle="tooltip-custom" data-placement="top" title="" data-original-title="Downloads">
+         <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330.29 299.12"><title>Downloads</title><path d="M217.56,291,173.8,310.85V162.22l124.69-56.56v66.88a6.19,6.19,0,1,0,12.39,0V96.16h0V94.51c0-.41-.41-.41-.41-.83v-.41a.89.89,0,0,0-.83-.83h0c-.41-.41-.83-.83-1.24-.83H308a1.44,1.44,0,0,0-.83-.41L163.89,28a5.26,5.26,0,0,0-5,0L15.67,90.38c-.41,0-.41.41-.83.41h-.41c-.41.41-.83.41-1.24.83V92c-.41.41-.41.41-.41.83a.4.4,0,0,1-.41.41c0,.41-.41.41-.41.83v1.65h0V247.27a5.53,5.53,0,0,0,3.3,5.37l149.46,73.08c.41,0,.41,0,.83.41H166c.41,0,1.24.41,1.65.41a3.12,3.12,0,0,0,1.65-.41h.83l52.43-23.95c3.3-1.24,4.54-5,2.89-8.26C224.17,291,220.45,289.38,217.56,291ZM33.84,96.16l67.3-29.31L225,125.47l-57.39,26ZM161.41,40.42l128,55.74-49.54,22.71L116.41,60.24ZM24.34,105.24l137.07,57V310L24.34,243.55Z" transform="translate(-11.95 -27.41)" /><path d="M276.6,179.56A65.81,65.81,0,0,0,211,245.2c0,35.92,29.73,65.65,65.65,65.65a65.65,65.65,0,0,0,0-131.29Zm0,119.32a53.26,53.26,0,1,1,53.26-53.26A53.39,53.39,0,0,1,276.6,298.87Z" transform="translate(-11.95 -27.41)" /><path d="M304.68,225l-33.44,36.74L248.53,239a6.13,6.13,0,1,0-8.67,8.67l27.25,27.25a6.21,6.21,0,0,0,4.54,1.65h0a6.63,6.63,0,0,0,4.54-2.06l38-41.7a6,6,0,0,0-.41-8.67C310.87,222.49,306.74,222.49,304.68,225Z" transform="translate(-11.95 -27.41)" /></svg>
+         <span>Downloads</span></a> -->
+         <% 
+         }
+         %>
+      </nav>
+      <!--end nav-->
+   </div>
+   <!--end main-icon-menu-->
+</div>

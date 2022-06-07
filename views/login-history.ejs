@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<%- include('partials/header') %>
+   <body>
+      <!-- Top Bar Start -->
+      <%- include('partials/top-bar') %>
+      <!-- Top Bar End -->
+      <div class="page-wrapper">
+         <!-- Left Sidenav -->
+       <%- include('partials/side-bar') %>
+         <!-- end left-sidenav-->
+         <!-- Page Content-->
+         <div class="page-content">
+            <div class="container-fluid">
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="float-right">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active">Users</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Users</h4>
+                        </div>
+                        <!--end page-title-box-->
+                    </div>
+                    <!--end col-->
+                </div><!-- end page title end breadcrumb -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-v-center justify-content-between">
+                                    <h3 class="mt-0">Login History List</h3>
+                                </div>
+                                <div class="table-rep-plugin">
+                                    <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                        <table id="tech-companies-1" class="table table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>S.No</th>
+                                                    <th>Username</th>
+                                                    <th>Email</th>
+                                                    <th>Login Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% if(data.length>0) { %>
+                                                <% for(var i=0; i<data.length; i++) {%>
+                                                <tr>
+                                                    <td><%= i+1 %></td>
+                                                    <td><%= data[i].username %></td>
+                                                    <td><%= data[i].email %></td>
+                                                    <td><%= data[i].created_at %></td>
+                                                </tr>
+                                                <% } %>
+                                                <% } else { %>
+                                                    <tr><td colspan="9" class="text-center">History Login not found.</td></tr>
+                                                <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- container -->
+           <%- include('partials/footer') %>
+            <!--end footer-->
+         </div><!-- end page content -->
+         <!-- end page content -->
+      </div>
+      <!-- end page-wrapper -->
+      <!-- jQuery  -->
+   </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+   <%- include('partials/header') %>
+   <body>
+       
+      <!-- Top Bar Start -->
+      <div class="topbar">
+         <!-- LOGO -->
+         <%- include('partials/top-bar') %>
+         <!--end logo-->
+         </div>
+      <!-- Top Bar End -->
+      <div class="page-wrapper">
+         <!-- Left Sidenav -->
+         <%- include('partials/side-bar') %>
+         <!-- end left-sidenav-->
+        <!-- Page Content-->
+        <div class="page-content">
+            <div class="container-fluid">
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="float-right">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active">Add User</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Add User</h4>
+                        </div>
+                        <!--end page-title-box-->
+                    </div>
+                    <!--end col-->
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-v-center justify-content-between">
+                                    <h3 class="mt-0">Add User</h3>
+                                    <a href="/users" class="btn btn-danger waves-effect m-l-5">Back</a>
+                                </div>
+                                <% if (validationError) { %>
+                                    <ul class="text-left" style="color:red;">
+                                    <% for(var i = 0; i < validationError.length; i++){ %>
+                                        <li style="list-style: none;color:red;"><%= validationError[i].msg %> </li>
+                                    <% } %>
+                                    </ul>
+                                <% } %>
+                                <form class="form-parsley"  action="/users/add-user" method="post" id="signUpForm" enctype="multipart/form-data">
+                                    <div class="form-group"><label>Username*</label> 
+                                      <input class="form-control" type="text" name="username" placeholder="User Name" value="<%= username %>">
+                                    </div>
+                                    <div class="form-group"><label>Email*</label> 
+                                      <input class="form-control" type="email" name="email" placeholder="Email Id" value="<%= email %>">
+                                    </div>
+                                    <div class="form-group"><label>Password*</label> 
+                                      <input class="form-control" type="password" name="password" placeholder="Password" >
+                                    </div>
+                                    <div class="form-group"><label>Company Profile</label> 
+                                      <input class="form-control" type="text" name="company_profile" placeholder="Company Profile" value="<%= company_profile %>">
+                                    </div>
+                                    <div class="form-group"><label>Professional Title</label> 
+                                      <input class="form-control" type="text" name="professional_title" placeholder="Professional Title" value="<%= professional_title %>">
+                                    </div>
+                                    <div class="form-group"><label>Phone Number*</label> 
+                                      <input class="form-control" type="text" name="phone_number" placeholder="Phone Number" value="<%= phone_number %>">
+                                    </div>
+                                    <div class="form-group"><label>Profile Image</label> 
+                                      <input class="form-control" type="file" name="image" style="display:block">
+                                    </div>
+                                    <div class="form-group mb-0"><button type="submit" class="btn btn-primary waves-effect waves-light">Submit</button> </div>
+                                    <!--end form-group-->
+                                </form>
+                                <!--end form-->
+                            </div>
+                            <!--end card-body-->
+                        </div>
+                        <!--end card-->
+                    </div><!-- end col -->
+                    
+                </div><!-- end row -->
+            </div><!-- container -->
+            <%- include('partials/footer') %>
+            <!--end footer-->
+         </div>
+         <!-- end page content -->
+      </div>
+      <!-- end page-wrapper -->
+      <script type="text/javascript">
+        $(document).ready(function () {
+            $('#signUpForm').validate({ // initialize the plugin
+                rules: {
+                    username: {
+                        required: true,
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                    },
+                    phone_number: {
+                        required: true,
+                        digits: true,
+                        minlength:10,
+                        maxlength:10
+                    }
+                },
+                messages: {
+                    username: {
+                        required: "Username is required. <i class='icon-info icons'></i>",
+                    },
+                    email: {
+                        required: "Email is required.  <i class='icon-info icons'></i>",
+                        email: "Email must be a valid email-id.  <i class='icon-info icons'></i>"
+                    },
+                    password: {
+                        required: "Password is required.  <i class='icon-info icons'></i>",
+                    },
+                    phone_number: {
+                        required: "Phone Number is required.  <i class='icon-info icons'></i>",
+                        digits: "Phone Number should be a number.  <i class='icon-info icons'></i>",
+                        minlength: "Phone number must be 10 digits.  <i class='icon-info icons'></i>",
+                        maxlength: "Phone number must be 10 digits.  <i class='icon-info icons'></i>",
+                    }
+                }
+            });
+        });
+    </script>
+   </body>
+</html>

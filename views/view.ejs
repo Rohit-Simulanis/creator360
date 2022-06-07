@@ -1,0 +1,1483 @@
+<html lang=en-in>
+<head>
+    <!-- <%- include('partials/header') %> -->
+    <!-- <link href="/stylesheets/dropzone.min.css" rel="stylesheet"/> -->
+    <!-- <script src="/javascripts/aframe.min.js"></script> -->
+      <script src="/javascripts/three.min.js"></script>
+      <script src="/javascripts/panolens.min.js"></script>
+      <script src="/javascripts/jquery.js"></script>
+    <style>
+        .footer {
+            display: none;
+        }
+        .loader{
+            display: none;
+        }
+        body {
+    overflow-y: hidden;
+}
+    #inputfilecont{
+        position: absolute;
+        z-index: 9999;
+    }
+ </style>
+  
+</head>
+<body>
+    <%- include('partials/top-bar') %>
+    <div class="page-wrapper">
+        <!-- Left Sidenav -->
+        <%- include('partials/side-bar') %>
+        <!-- Page Content-->
+        <!--loader image-->
+                <div id="loading-image" class="loader-wrappr">
+                    <svg class="load-center" version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                      viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                        <path fill="#fff" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                          <animateTransform 
+                             attributeName="transform" 
+                             attributeType="XML" 
+                             type="rotate"
+                             dur="1s" 
+                             from="0 50 50"
+                             to="360 50 50" 
+                             repeatCount="indefinite" />
+                      </path>
+                    </svg>
+                </div>
+ 
+        <div class="page-content">
+
+            <div class="container-fluid p-0">
+                <div class="row">
+                    <div class="col-lg-12 p-0">
+                        <div class="loader">
+                        <svg width="40px" class="mr-2" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 432.8 432.8" style="enable-background:new 0 0 432.8 432.8;" xml:space="preserve">
+                                        <circle style="fill:#0882cb;" cx="298" cy="176.4" r="14"></circle>
+                                        <g>
+                                            <path style="fill:#0882cb;" d="M326,107.2c-3.6-10.4-7.6-20.4-12.4-30C289.6,28.4,254,0,216.4,0c-70,0-126.8,97.2-126.8,216.4
+        c0,33.6,4.4,65.6,12.8,94.8c-54.4-20.4-90-55.2-90-94.8c0-34.8,28-67.2,77.2-89.2c3.2-1.2,4.4-5.2,3.2-8c-1.2-3.2-5.2-4.4-8-3.2
+        C30.8,140,0,176.4,0,216.4c0,46.4,43.2,87.2,107.2,109.2c5.2,15.2,11.6,29.6,18.8,42.4c24,41.6,56,64.8,90.4,64.8l0,0
+        c40,0,76.8-30.8,100.8-85.2c1.2-3.2,0-6.8-3.2-8s-6.8,0-8,3.2c-22,49.2-54.8,77.6-89.6,77.6l0,0c-30,0-58.4-20.8-80-58.4
+        c-5.6-9.6-10.4-20.4-14.8-31.6c28.8,8,60.8,12.8,94.8,12.8c119.2,0,216.4-56.8,216.4-126.8C432.8,170,389.6,129.2,326,107.2z
+         M216.4,330.8c-36,0-70-5.2-99.6-14.4c-9.6-30-14.8-64.4-14.8-99.6c0-112.4,51.2-204,114.4-204c32.8,0,64.4,25.6,86,70.4
+        c3.2,6.4,5.6,12.8,8.4,19.6C282.4,94.8,250,90,216.4,90c-29.6,0-58.4,3.6-85.2,10c-3.2,0.8-5.2,4-4.4,7.6c0.8,3.2,4,5.2,7.6,4.4
+        c26-6.4,53.6-9.6,82.4-9.6c36,0,70,5.2,99.6,14.4c2.8,8.4,5.2,17.6,7.2,26.8c5.2,23.2,7.6,48,7.6,73.2c0,28.4-3.2,55.6-9.6,81.6
+        c-0.8,3.2,1.2,6.8,4.4,7.6c3.2,0.8,6.8-1.2,7.6-4.4c6.4-26.8,10-55.2,10-84.4c0-26-2.8-51.6-8-75.6c-1.6-6.4-3.2-12.8-4.8-19.2
+        c54,19.6,89.6,54.4,89.6,94C420.4,279.6,328.8,330.8,216.4,330.8z"></path>
+                                            <path style="fill:#0882cb;" d="M154.4,227.2L154.4,227.2c8.4-3.2,12.4-8.8,12.4-15.6c0-9.2-8-16.8-22.4-16.8
+        c-8.8,0-16.8,2.4-20.8,5.2l3.2,11.2c2.8-1.6,8.4-4,14-4c6.4,0,10,2.8,10,6.8c0,5.6-6.8,7.6-12,7.6h-6v11.2h6.4
+        c6.8,0,13.6,2.8,13.6,9.6c0,5.2-4,8.8-12.4,8.8c-6.4,0-12.8-2.8-15.6-4l-3.2,11.6c4,2.4,11.2,4.8,20,4.8c16.8,0,27.2-8.8,27.2-20.4
+        C169.2,234.8,162.4,228.8,154.4,227.2z"></path>
+                                            <path style="fill:#0882cb;" d="M208.8,218c-6.4,0-10.8,2-14,5.2h-0.4c1.6-8,8-14.8,22-16c2.4-0.4,4.4-0.4,6-0.4v-12
+        c-1.6,0-3.2,0-6.4,0c-10.4,0.4-19.2,4-26,10c-7.2,6.8-12,17.2-12,29.6c0,16,8.8,29.2,26.4,29.2c14.4,0,24.8-10.8,24.8-24
+        C229.2,226,220,218,208.8,218z M204.4,252.4c-7.2,0-10.4-6.4-10.8-13.6c0-2,0.4-3.2,0.8-4c1.6-3.2,5.2-6,9.2-6
+        c6.8,0,10,5.2,10,11.6C213.6,247.6,210,252.4,204.4,252.4z"></path>
+                                            <path style="fill:#0882cb;" d="M260.8,194.8c-17.2,0-25.6,15.2-25.6,34.8c0,18.8,7.6,34.4,24.8,34.4c17.2,0,25.6-14,25.6-34.8
+        C285.6,210.8,278.8,194.8,260.8,194.8z M260.8,252c-6,0-9.6-7.2-9.6-22.8c0-15.6,4-22.8,9.6-22.8c6.4,0,9.6,8,9.6,22.8
+        C270,244.4,266.8,252,260.8,252z"></path>
+                                            <path style="fill:#0882cb;" d="M298,154c-12.4,0-22.8,10-22.8,22.8c0,12.4,10,22.8,22.8,22.8c12.4,0,22.8-10,22.8-22.8
+        C320.8,164,310.8,154,298,154z M298,186.8c-5.6,0-10.4-4.8-10.4-10.4S292.4,166,298,166s10.4,4.8,10.4,10.4
+        C308.4,182.4,304,186.8,298,186.8z"></path>
+                                        </g>
+                                    </svg>
+                                </div>
+<input type="hidden" name="viewId" id="viewIdValue" value="">
+                        <div class="canvas-frame">
+                            <!--inventory-slide-->
+                            <div class="screen-opt">
+                                <div class="inv-side-wrapper">
+                                    <a href="#" class="scr-opt-toggel">
+                                        <svg enable-background="new 0 0 32 32" viewBox="0 0 32 32" width="35px" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="m26 32h-20c-3.314 0-6-2.686-6-6v-20c0-3.314 2.686-6 6-6h20c3.314 0 6 2.686 6 6v20c0 3.314-2.686 6-6 6z" fill="#ffe6e2" />
+                                            <path d="m15.333 17.167c0-.275-.225-.5-.5-.5h-2.5v2c0 .368-.298.667-.667.667-.368 0-.667-.298-.667-.667v-2h-2.499c-.275 0-.5.225-.5.5v6.333c0 .275.225.5.5.5h6.333c.275 0 .5-.225.5-.5z" fill="#fc573b" />
+                                            <path d="m24 17.167c0-.275-.225-.5-.5-.5h-2.5v2c0 .368-.298.667-.667.667-.368 0-.667-.298-.667-.667v-2h-2.5c-.275 0-.5.225-.5.5v6.333c0 .275.225.5.5.5h6.334c.275 0 .5-.225.5-.5z" fill="#fc573b" />
+                                            <path d="m19.667 8.5c0-.275-.225-.5-.5-.5h-2.5v2c0 .368-.298.667-.667.667-.368 0-.667-.298-.667-.667v-2h-2.5c-.275 0-.5.225-.5.5v6.333c0 .275.225.5.5.5h6.333c.275 0 .5-.225.5-.5v-6.333z" fill="#fd907e" /></svg> Inventory</a>
+                                    <div class="text-right">
+                                        <ul class="in-list mt-2 ml-3">
+                                            <li><i class="icon_m mdi mdi-image"></i></li>
+                                            <li><i class="icon_m mdi mdi-video"></i></li>
+                                            <li><i class="icon_m mdi mdi-music"></i></li>
+                                            <li><button type="button" class="icon_m" data-toggle="modal" data-animation="bounce" data-target=".inventory-mdl"><i class="mdi mdi mdi-plus"></i></button>
+                                  </li>
+                                        </ul>
+                                        
+                                          </div>
+
+                                    <div class="image-listing">
+                                        <ul id="list_of_inventory">
+                                        </ul>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="aframe360div">
+                                     
+                              <div id="inputfilecont">
+                                <input id="inp" type='file' />
+                                <botton onclick="doneEvent()">DONE</botton>
+                              </div>
+                            </div>
+
+                            <div class="right-pannel">
+                                <div  class="head-title d-v-center">
+                                    <p class="d-v-center">
+                                        <svg width="40px" class="mr-2" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 432.8 432.8" style="enable-background:new 0 0 432.8 432.8;" xml:space="preserve">
+                                            <circle style="fill:#fff;" cx="298" cy="176.4" r="14" />
+                                            <g>
+                                                <path style="fill:#fff;" d="M326,107.2c-3.6-10.4-7.6-20.4-12.4-30C289.6,28.4,254,0,216.4,0c-70,0-126.8,97.2-126.8,216.4
+            c0,33.6,4.4,65.6,12.8,94.8c-54.4-20.4-90-55.2-90-94.8c0-34.8,28-67.2,77.2-89.2c3.2-1.2,4.4-5.2,3.2-8c-1.2-3.2-5.2-4.4-8-3.2
+            C30.8,140,0,176.4,0,216.4c0,46.4,43.2,87.2,107.2,109.2c5.2,15.2,11.6,29.6,18.8,42.4c24,41.6,56,64.8,90.4,64.8l0,0
+            c40,0,76.8-30.8,100.8-85.2c1.2-3.2,0-6.8-3.2-8s-6.8,0-8,3.2c-22,49.2-54.8,77.6-89.6,77.6l0,0c-30,0-58.4-20.8-80-58.4
+            c-5.6-9.6-10.4-20.4-14.8-31.6c28.8,8,60.8,12.8,94.8,12.8c119.2,0,216.4-56.8,216.4-126.8C432.8,170,389.6,129.2,326,107.2z
+             M216.4,330.8c-36,0-70-5.2-99.6-14.4c-9.6-30-14.8-64.4-14.8-99.6c0-112.4,51.2-204,114.4-204c32.8,0,64.4,25.6,86,70.4
+            c3.2,6.4,5.6,12.8,8.4,19.6C282.4,94.8,250,90,216.4,90c-29.6,0-58.4,3.6-85.2,10c-3.2,0.8-5.2,4-4.4,7.6c0.8,3.2,4,5.2,7.6,4.4
+            c26-6.4,53.6-9.6,82.4-9.6c36,0,70,5.2,99.6,14.4c2.8,8.4,5.2,17.6,7.2,26.8c5.2,23.2,7.6,48,7.6,73.2c0,28.4-3.2,55.6-9.6,81.6
+            c-0.8,3.2,1.2,6.8,4.4,7.6c3.2,0.8,6.8-1.2,7.6-4.4c6.4-26.8,10-55.2,10-84.4c0-26-2.8-51.6-8-75.6c-1.6-6.4-3.2-12.8-4.8-19.2
+            c54,19.6,89.6,54.4,89.6,94C420.4,279.6,328.8,330.8,216.4,330.8z" />
+                                                <path style="fill:#fff;" d="M154.4,227.2L154.4,227.2c8.4-3.2,12.4-8.8,12.4-15.6c0-9.2-8-16.8-22.4-16.8
+            c-8.8,0-16.8,2.4-20.8,5.2l3.2,11.2c2.8-1.6,8.4-4,14-4c6.4,0,10,2.8,10,6.8c0,5.6-6.8,7.6-12,7.6h-6v11.2h6.4
+            c6.8,0,13.6,2.8,13.6,9.6c0,5.2-4,8.8-12.4,8.8c-6.4,0-12.8-2.8-15.6-4l-3.2,11.6c4,2.4,11.2,4.8,20,4.8c16.8,0,27.2-8.8,27.2-20.4
+            C169.2,234.8,162.4,228.8,154.4,227.2z" />
+                                                <path style="fill:#fff;" d="M208.8,218c-6.4,0-10.8,2-14,5.2h-0.4c1.6-8,8-14.8,22-16c2.4-0.4,4.4-0.4,6-0.4v-12
+            c-1.6,0-3.2,0-6.4,0c-10.4,0.4-19.2,4-26,10c-7.2,6.8-12,17.2-12,29.6c0,16,8.8,29.2,26.4,29.2c14.4,0,24.8-10.8,24.8-24
+            C229.2,226,220,218,208.8,218z M204.4,252.4c-7.2,0-10.4-6.4-10.8-13.6c0-2,0.4-3.2,0.8-4c1.6-3.2,5.2-6,9.2-6
+            c6.8,0,10,5.2,10,11.6C213.6,247.6,210,252.4,204.4,252.4z" />
+                                                <path style="fill:#fff;" d="M260.8,194.8c-17.2,0-25.6,15.2-25.6,34.8c0,18.8,7.6,34.4,24.8,34.4c17.2,0,25.6-14,25.6-34.8
+            C285.6,210.8,278.8,194.8,260.8,194.8z M260.8,252c-6,0-9.6-7.2-9.6-22.8c0-15.6,4-22.8,9.6-22.8c6.4,0,9.6,8,9.6,22.8
+            C270,244.4,266.8,252,260.8,252z" />
+                                                <path style="fill:#fff;" d="M298,154c-12.4,0-22.8,10-22.8,22.8c0,12.4,10,22.8,22.8,22.8c12.4,0,22.8-10,22.8-22.8
+            C320.8,164,310.8,154,298,154z M298,186.8c-5.6,0-10.4-4.8-10.4-10.4S292.4,166,298,166s10.4,4.8,10.4,10.4
+            C308.4,182.4,304,186.8,298,186.8z" />
+                                            </g>
+                                        </svg> Views</p>
+
+                                        <button class="btn btn-light" id="export">Export</button>
+                                </div>
+                               
+                                    
+                                <div class="container" id="list_of_views">
+                                    
+                                </div>
+                               <p>license id : <%= login_license_id %></p> 
+                               <p>sceneData length : <%= sceneData.length %></p> 
+                               <p>scene_count : <%= license_data[0].scene_count %></p> 
+
+                               <!-- <p>sceneData length :  <%= scncount %> </p>  -->
+                               <!-- <% if(sceneData.length>=license_data[0].scene_count) { %> -->
+                                    <!-- <p>Shivangi Disable Add</p>  || sceneData.length>=scncount-->
+                                    <div class="bottom-tool-menu" style="width: 16% !important;">
+                                        <ul class=" d-v-center justify-content-between m-0 p-0">
+                                            <li>Please add or update your license (Your scene creation limit is over)</li>
+                                        </ul>
+                                    </div>
+                               <!-- <% } else { %> -->
+                                    <!-- <p>Shivangi Add</p> -->
+                                    <div class="bottom-tool-menu">
+                                        <ul class=" d-v-center justify-content-between m-0 p-0">
+                                            <li data-toggle="modal" data-animation="bounce" data-target=".view-mdl"><a href="#" title="Add"><i class="mdi mdi mdi-plus"></i></a></li>
+                                            <!-- <li><a href="#" title="Delete"><i class="mdi mdi-trash-can-outline"></i></a></li>
+                                            <li><a href="#" title="Duplicate"><i class=" dripicons-duplicate"></i></a></li> -->
+                                        </ul>
+                                    </div>
+                               <!-- <% } %> -->
+                            </div>
+                            <!-- preview-btn -->
+                            <a onclick="saveJson()" style="left: 66% !important;" href="Javascript:void(0)" id="savewebview" class="btn btn-dark prv-btn">Save</a>
+                            <a style="left: 72% !important;" href="/projects/preview-webview/<%= projectId %>" id="webviewPreview" target="_blank" class="btn btn-dark prv-btn">Run</a>
+
+
+                            <div class="bottom-menu-wrap">
+                                <ul class="bottom_menu d-v-center justify-content-between">
+                                    <li>
+                                        <button class="hotspotbtn hotspot_1" onclick="createmarker(1)" disabled>
+                                           <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 81.98 63.96"><title>Add Link</title><path d="M75.13,18a15.89,15.89,0,0,0-11.25,4.66L57,29.56a2,2,0,0,0,2.84,2.84l6.91-6.94A11.88,11.88,0,0,1,83.5,42.28L65.28,60.5A11.88,11.88,0,0,1,47.47,44.84a2,2,0,1,0-3.16-2.44A15.88,15.88,0,0,0,68.13,63.31L86.34,45.09A15.88,15.88,0,0,0,75.13,18Zm-32,14a15.89,15.89,0,0,0-11.25,4.66L13.66,54.88A15.88,15.88,0,0,0,36.13,77.31L43,70.41a2,2,0,0,0-2.79-2.87l-.06.06L33.28,74.5A11.88,11.88,0,0,1,16.5,57.69L34.72,39.47A11.88,11.88,0,0,1,52.53,55.13a2,2,0,1,0,3.15,2.48h0A15.89,15.89,0,0,0,43.13,32Z" transform="translate(-9.01 -18)"/></svg>
+                                            <p>Link</p>
+                                        </button>
+                                    </li>
+
+                                    <li>
+                                        <button class="hotspotbtn hotspot_2" onclick="createmarker(2)" disabled>
+                                            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 512 512" width="512" height="512">
+                                                <title>Add Photo</title>
+                                                <path d="M215.255,230.108a43.184,43.184,0,1,0-43.184-43.184A43.233,43.233,0,0,0,215.255,230.108Zm0-70.368a27.184,27.184,0,1,1-27.184,27.184A27.215,27.215,0,0,1,215.255,159.74Z" />
+                                                <path d="M454,338H419V303a8,8,0,0,0-16,0v35H369a8,8,0,0,0,0,16h34v34a8,8,0,0,0,16,0V354h35a8,8,0,0,0,0-16Z" />
+                                                <path d="M472,273.129V121.724C472,95.256,450.209,74,423.741,74H54.753A47.608,47.608,0,0,0,7,121.724V362.829C7,389.3,28.286,411,54.753,411H345.639a93.6,93.6,0,0,0,159.737-66.176C505.376,316.084,492,290.293,472,273.129ZM54.753,90H423.741C441.386,90,456,104.079,456,121.724V262.3a93.081,93.081,0,0,0-44.119-11.016,95.1,95.1,0,0,0-10.46.581L334.4,204.411a8.021,8.021,0,0,0-10.249.822L233.827,294,128.85,242.84a7.764,7.764,0,0,0-7.4.271L23,300.284V121.724A31.591,31.591,0,0,1,54.753,90ZM23,362.829V318.781L125.791,259.09l95.983,46.894L131.231,395H54.753A31.973,31.973,0,0,1,23,362.829ZM154.057,395,330.578,221.42l49.888,35.3a93.737,93.737,0,0,0-62.21,88.17c0,18.4,5.344,35.112,14.557,50.112Zm257.694,27.276a77.5,77.5,0,1,1,77.5-77.495A77.583,77.583,0,0,1,411.751,422.276Z" />
+                                            </svg>
+                                            <p>Image</p>
+                                        </button>
+                                    </li>
+
+                                    <li>
+                                        <button class="hotspotbtn hotspot_3" onclick="createmarker(3)" disabled>
+
+                                            <svg height="472pt" viewBox="0 -87 472 472" width="472pt" xmlns="http://www.w3.org/2000/svg">
+                                                <title>Add Video</title>
+                                                <path d="m467.101562 26.527344c-3.039062-1.800782-6.796874-1.871094-9.898437-.179688l-108.296875 59.132813v-35.480469c-.03125-27.601562-22.398438-49.96875-50-50h-248.90625c-27.601562.03125-49.96875 22.398438-50 50v197.421875c.03125 27.601563 22.398438 49.96875 50 50h248.90625c27.601562-.03125 49.96875-22.398437 50-50v-34.835937l108.300781 59.132812c3.097657 1.691406 6.859375 1.625 9.894531-.175781 3.039063-1.804688 4.898438-5.074219 4.898438-8.601563v-227.816406c0-3.53125-1.863281-6.796875-4.898438-8.597656zm-138.203124 220.898437c-.015626 16.5625-13.4375 29.980469-30 30h-248.898438c-16.5625-.019531-29.980469-13.4375-30-30v-197.425781c.019531-16.558594 13.4375-29.980469 30-30h248.90625c16.558594.019531 29.980469 13.441406 30 30zm123.101562-1.335937-103.09375-56.289063v-81.535156l103.09375-56.285156zm0 0" /></svg>
+                                            <p>Video</p>
+                                        </button>
+                                    </li>
+
+                                    <li>
+                                        <button class="hotspotbtn hotspot_4" onclick="createmarker(4)" disabled>
+                                            
+                                        <svg style="width: 30px;" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">
+                                            <title>Add Text</title><path d="M17.5,6H6.5a.5.5,0,0,0-.5.5H6v1a.5.5,0,0,0,1,0V7h4.5V17h-1a.5.5,0,0,0,0,1h3a.5.5,0,0,0,0-1h-1V7H17v.5a.5.5,0,0,0,1,0v-1a.5.5,0,0,0-.5-.5Z" transform="translate(-6 -6)"/></svg>
+                                            <p>Text</p>
+                                        </button>
+                                    </li>
+                                    <% if(login_license_id != null) { %>
+                                    <li>
+                                        <button class="hotspotbtn hotspot_5" onclick="createmarker(5)" disabled>
+                                            <svg height="337pt" viewBox="-17 0 337 337.71242" width="337pt" xmlns="http://www.w3.org/2000/svg">
+                                                <title>Add Audio</title>
+                                                <path d="m52.355469 279.199219c28.707031-.03125 51.96875-23.292969 52-52v-96.25l185.929687-37.664063v158.480469c-16.785156-19.742187-45.511718-24.167969-67.460937-10.394531-21.945313 13.769531-30.457031 41.5625-19.984375 65.261718 10.46875 23.699219 36.75 36.121094 61.710937 29.164063 24.957031-6.953125 41.027344-31.175781 37.734375-56.875v-252.917969c0-7.800781-3.5-15.191406-9.539062-20.128906-6.039063-4.941406-13.976563-6.90625-21.621094-5.359375l-157.929688 31.992187c-12.105468 2.484376-20.804687 13.121094-20.835937 25.480469v136.027344c-15.410156-18.570313-41.574219-24.097656-63.175781-13.347656-21.605469 10.753906-32.972656 34.957031-27.445313 58.449219 5.523438 23.492187 26.488281 40.09375 50.621094 40.085937zm198.351562 46.238281c-21.339843.003906-38.921875-16.75-39.953125-38.0625-1.03125-21.316406 14.851563-39.6875 36.089844-41.75 21.242188-2.058594 40.359375 12.917969 43.441406 34.035156v4.933594c.003906.722656.136719 1.441406.390625 2.117188-.703125 21.570312-18.382812 38.699218-39.96875 38.726562zm-146.347656-267.445312c.015625-6.65625 4.699219-12.382813 11.21875-13.722657l157.929687-31.988281c4.117188-.835938 8.390626.222656 11.640626 2.882812 3.253906 2.660157 5.136718 6.636719 5.136718 10.839844v55.039063l-185.925781 37.664062zm-52 129.207031c22.089844 0 40 17.90625 40 40 0 22.089843-17.910156 40-40 40-22.09375 0-40-17.910157-40-40 .023437-22.082031 17.917969-39.976563 39.996094-40zm0 0" /></svg>
+                                            <p>Audio</p>
+                                        </button>
+                                    </li>
+                                    <% } %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+    <%- include('partials/footer') %>
+    <script src="/javascripts/dropzone.min.js"></script>
+
+    <!--  inventory-modal -->
+    <div class="modal fade inventory-mdl" tabindex="-1" role="dialog" aria-labelledby="inventory-mdl" aria-hidden="true" data-backdrop="static" data-keyboard="false" id="addInventoryModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0" id="myLargeModalLabel"> Inventory</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="mdi mdi-close"></i></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/projects/upload-project-inventory" enctype="multipart/form-data">
+                      <!-- <div class="fallback"> -->
+                        <input name="images" type="file" class="form-control" multiple required style="display:inline-block;" />
+                        <input name="projectId" type="hidden" value="<%= projectId %>" />
+                        
+                        <span><small>You can upload multiple file also.</small></span>
+                        <div class="text-right mt-3">
+                        <button class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.modal -->
+
+    <!--  view-modal -->
+    <div class="modal fade view-mdl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="addViewModal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0" id="myLargeModalLabel">Add View</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="mdi mdi mdi-close"></i></button>
+                </div>
+                <div class="modal-body">
+                    <!-- <form action="/projects/addview" method="post" id="addviewform"> -->
+                    <ul class="split-sc-mdl">
+                        <li class="sc-1">
+                            <fieldset>
+                                <div class="form-group"><label for="example-email-input1" class="col-form-label">View Name</label>
+                                    <div class="">
+                                        <input class="form-control viewinputs" type="text" name="viewName" id="viewname" required>
+                                        <input type="hidden" value="<%- projectId%>" name="projectId" id="project_id" />
+                                    </div>
+                                </div>
+                                <!--end form-group-->
+                            </fieldset>
+                        </li>
+                        <li class="sc-2">
+                            <h4>Select Image/Video</h4>
+                            <ul class="g-list" onclick="showSelected()" id="inventory_view">
+                            </ul>
+                        </li>
+                    </ul>
+                <!-- </form> -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="addview()" >Save</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    </div>
+
+    
+    <div class="modal fade view-mdl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="hotspots" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0" id="myLargeModalLabel">Add Hotspot</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="mdi mdi mdi-close"></i></button>
+                </div>
+                <form action="/projects/addhotspot" enctype="multipart/form-data" method="POST" id="addhotspotform" >
+                <div class="modal-body">
+                    <div class="view-mdl-container">
+                        <h4>Title</h4>
+                        <input class="form-control" type="text" name="hotspot_title" id="hotspottitle">
+                        <input class="form-control" type="hidden" name="x" id="XValue" >
+                        <input class="form-control" type="hidden" name="y" id="YValue" >
+                        <input class="form-control" type="hidden" name="z" id="ZValue" >
+                        <input class="form-control" type="hidden" name="projectId" value="<%- projectId %>" >
+                        <input class="form-control" type="hidden" name="hotspot_type" id="hotspotTypeVal">
+                        <input class="form-control" type="hidden" name="viewId" id="hotspotViewIdValue">
+                        <div id="hotspotData">
+                        </div>
+                        <div id="viewsOptions"></div>
+                        
+                        </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="saveHotspot()" >Save</button>
+                    <!-- <input type="submit" class="btn btn-primary waves-effect waves-light" value="Save"> -->
+                </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    </div>
+
+    <div class="modal fade view-mdl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="audioHotspots" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0" id="myLargeModalLabel">Add audio for view</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="mdi mdi mdi-close"></i></button>
+                </div>
+                <div class="modal-body">
+                <form>
+                <h4 id="viewName"></h4>
+                <div id="audioCheck"></div>
+                <input type="hidden" name="viewId" value="" id="viewIdValueAudio">
+                <input type="hidden" name="" value="" id="currentAudioVal">
+                <hr/>
+                <div id="audioFiles"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary waves-effect waves-light" onclick="saveAudio()" >Save</button>
+                </div>
+                </form>
+                </body>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+    </div>
+    <script type="text/javascript">
+        var globalI;
+        function radioId(i)
+        {
+            globalI=i;
+        }
+    </script>
+    <script type="text/javascript">
+        function saveJson()
+        {
+            $('#loading-image').show();
+            $.ajax({
+                  url: '/projects/generateJson/<%- projectId %>/2',
+                  type: 'GET',
+                  success: function(res)
+                  {
+                    if(res.msg=='Success')
+                    {
+                        $('#loading-image').hide();
+                        $('#webviewPreview').css('display','block');
+                        $('#export').css('display','block');
+                        toastr.success('Saved.');
+                    }
+                  }
+            });
+        }
+    </script>
+
+    <script>
+        function findHotspots(viewId)
+        {
+            //alert('hotspot---'+viewId);
+            hotspot_json.length=0;
+            $.ajax({
+                  url: '/projects/fetch-hotspot-data/'+viewId,
+                  type: 'GET',
+                  success: function(res)
+                  {
+                    if(res.msg=='Success')
+                    {
+                       if(res.hotspots.length>0)
+                        {
+                            console.log('res.hotspots---')
+                            console.log(res.hotspots)
+                            $.each(res.hotspots, function(data, val) {
+                                 hotspot_json.push({x:val.x,y:val.y, z:val.z, img:val.hotspot_icon,type:val.hotspot_type})
+                                 //console.log(hotspot_json)
+                                 //console.log(data)
+                                 //alert('something')
+                                 if(res.hotspots.length-1==data)
+                                 {
+                                     loadHotspot();
+                                     updateView();
+                                 }
+                                 
+                            })
+                            
+                        }
+                    }
+                  }
+            });
+        }
+    </script>
+    <script>
+        var panorama;
+        var customAudio = '';
+        var inventoryAudioData='';
+
+        function autoselectAduio(customAudio)
+        {
+            customAudio = customAudio;       //////assigned current custom audio
+
+            $.ajax({
+                  url: '/projects/fetchInventoryData',
+                  type: 'POST',
+                  data: {projectId:<%= projectId %> },
+                  success: function(res)
+                  {
+                    if(res.msg=='Success')
+                    {
+                        inventoryAudioData='';
+                        inventoryAudioData += '<h4>Select Audio</h4><ul class="g-list">';
+                        if(customAudio=='')
+                        {
+                            inventoryAudioData +=  '<li><div><input type="radio" id="custom_audio_none" name="custom_audio" checked  value=""><span class="checkmark"></span><img  class="audio" src="/images/music.png" style="width: 50px; height: 50px;"></div><p>None</p>&nbsp;</li>'
+                        } else{
+                            inventoryAudioData +=  '<li><div><input type="radio" id="custom_audio_none" name="custom_audio"  value=""><span class="checkmark"></span><img class="audio" src="/images/music.png" style="width: 50px; height: 50px;"></div><p>None</p>&nbsp;</li>'
+                        }
+
+                        
+
+                        if(res.inventory.length>0)
+                        {
+                            $.each(res.inventory, function(data, val) {
+                                if(val.filetype==3)
+                                {
+                                    inventoryAudioData += '<li><div>';
+                                    // icon video inventory data for hotspot modal
+                                    if(customAudio==val.filename)
+                                    {
+                                        inventoryAudioData += '<input type="radio" onchange="hotspotImgVal('+val.id+')" id="custom_audio'+val.id+'" name="custom_audio" value="'+val.filename+'" checked><span class="checkmark"></span><img class="audio" src="/images/music.png" style="width: 50px; height: 50px;">&nbsp;';
+                                    } else{
+                                        inventoryAudioData += '<input type="radio" onchange="hotspotImgVal('+val.id+')" id="custom_audio'+val.id+'" name="custom_audio" value="'+val.filename+'" ><span class="checkmark"></span><img class="audio" src="/images/music.png" style="width: 50px; height: 50px;">&nbsp;';
+                                    }
+                                    inventoryAudioData +='</div><p>'+val.original_filename+'</p></li>';
+                                }
+                            });
+                            
+                        }
+                        inventoryAudioData += '</ul>';
+                    }
+                  }
+            });
+        }
+
+        function updateBackground(backgroundData,viewName, backgroundType, id, ismuted, customAudio)
+        {
+            
+
+            findHotspots(id);
+            // show selected audio radio button
+            autoselectAduio(customAudio);
+            $('#currentAudioVal').val(customAudio);
+
+            hotspot_json.length=0;
+
+            //customAudio = customAudio; //////assigned current custom audio
+
+            //alert(ismuted)
+            var myId = $('.viewdiv'+id).attr('id');
+            $('.hotspotbtn').removeAttr('disabled');
+            $('.bottom_menu li button').css('opacity', 1);
+            $('.bottom_menu li button').css('cursor', 'pointer');
+
+            $('#viewIdValue').val(id);
+            $('#viewIdValueAudio').val(id);
+            $('#viewName').html('View Name: '+viewName);
+
+            $('.nested-wrapper').removeClass('selected');
+            if(myId==id)
+            {
+                $('#'+id).addClass('selected');
+            }
+
+            if (backgroundType == "1") 
+            {
+                $('#audioCheck').html('Sound is not supported because view is an 360 image');
+                  panorama = new PANOLENS.ImagePanorama("/uploads/projectsinventory/"+backgroundData);
+            } 
+            else 
+            {
+                // $('#audioCheck').html('<label><input type="checkbox" name="ismuted" id="videoSound"/>Enable default audio.(This enable video\'s default sound).</label>');
+                    $('#audioCheck').html('');
+                    if(ismuted)
+                    {
+                        $('#audioCheck').html('<label><input type="checkbox" name="ismuted" id="videoSound" checked />Muted (Enable if you want to mute video sound)</label>');
+                    } else {
+                        $('#audioCheck').html('<label><input type="checkbox" name="ismuted" id="videoSound" />Muted (Enable if you want to mute video sound)</label>');
+                    }   
+                 
+
+                  panorama = new PANOLENS.VideoPanorama("/uploads/projectsinventory/"+backgroundData, { autoplay: true, loop: true, muted: false });
+            }
+
+            updateView(); // peno methed
+        }
+
+
+        var backgroundtype = "img";
+        var hotspot_json = [];
+        var temp_hotspot = "";
+        let clickedPos;
+        var popup = document.getElementById("inputfilecont");
+
+        document.getElementById("inp").addEventListener("change", readFile);
+        var bar = document.querySelector('#bar');
+        var loadindex = 0;
+
+        function readFile() {
+          if (this.files && this.files[0]) {
+
+            var FR = new FileReader();
+            FR.addEventListener("load", function (e) {
+              temp_hotspot = e.target.result;
+            });
+            FR.readAsDataURL(this.files[0]);
+          }
+        }
+
+        var viewer_main = new PANOLENS.Viewer({autoHideInfospot: false, output: 'console', reverseDragging: false });
+      
+        // console.log(viewer_main);
+        var logEvent = ({ type }) => console.log(type);
+        viewer_main.reticle.addEventListener('reticle-start', logEvent);
+        viewer_main.reticle.addEventListener('reticle-update', logEvent);
+        viewer_main.reticle.addEventListener('reticle-end', logEvent);
+        viewer_main.reticle.addEventListener('reticle-ripple-start', logEvent);
+        viewer_main.reticle.addEventListener('reticle-ripple-end', logEvent);
+
+        // Loading Progress Bar (Top Of Frame) 
+        // function onProgressUpdate(event) {
+        //   var percentage = event.progress.loaded / event.progress.total * 100;
+        //   bar.style.width = percentage + "%";
+        //   if (percentage >= 100) {
+        //     bar.classList.add('hide');
+        //     setTimeout(function () {
+        //       bar.style.width = 0;
+        //     }, 1000);
+        //   }
+        // }
+        
+        // Loading Background
+        if (backgroundtype === "img") {
+
+          panorama = new PANOLENS.ImagePanorama("/images/360Demoold.jpg");
+          
+
+        } else {
+          panorama = new PANOLENS.VideoPanorama("video File", { autoplay: true, loop: true, muted: false });
+        }
+    function toDataUrl(url, callback) {
+        if(url && url != ""){
+             var xhr = new XMLHttpRequest();
+              xhr.onload = function () {
+                var reader = new FileReader();
+                reader.onloadend = function () {
+                  callback(reader.result);
+                  return
+                }
+                reader.readAsDataURL(xhr.response);
+              };
+              xhr.open('GET', url);
+              xhr.responseType = 'blob';
+              xhr.send();
+        }
+        else{
+            callback("");
+            return
+        }
+     
+    }
+        function loadHotspot(){
+
+        // Loading Default Hotspots 
+        hotspot_json.map((list, index) => {
+              toDataUrl(`/uploads/projectsinventory/${list.img}`, function (Base64img) {
+                console.log(hotspot_json)
+                var defaultIcon = '';
+                //console.log(defaultIcon);
+                if(list.type=='1')
+                {
+                   defaultIcon  = '/uploads/projectsinventory/hotspot.png';
+                } else if(list.type=='2')
+                {
+                    defaultIcon = '/uploads/projectsinventory/image.png';
+                } else if(list.type=='3')
+                {
+                    defaultIcon = '/uploads/projectsinventory/video.png';
+                } else if(list.type=='4')
+                {
+                    defaultIcon = '/uploads/projectsinventory/text.png';
+                } else {
+                    defaultIcon = PANOLENS.DataImage.Info;
+                }
+                
+          var infospot = new PANOLENS.Infospot(350, list.img && list.img != "" ? Base64img : defaultIcon, false);
+          infospot.position.set(list.x, list.y, list.z);
+           // console.log(list);
+          // from Ankit Start
+        if (list.type === "trigger") {
+          infospot.addEventListener('click', function () {
+            var tempindex = hotspot_json.find(x => x.id === list.trigger)
+            if (tempindex) {
+
+              loadindex = hotspot_json.indexOf(tempindex);
+              //console.log(panorama)
+              viewer_main.remove(panorama);
+              
+              var tempcanvas = document.getElementsByClassName('panolens-container')[0].childNodes[0];
+              var tempdiv = document.getElementsByClassName('panolens-container')[0].childNodes[1];
+              document.getElementsByClassName('panolens-container')[0].innerHTML = ""
+              document.getElementsByClassName('panolens-container')[0].appendChild(tempcanvas);
+              document.getElementsByClassName('panolens-container')[0].appendChild(tempdiv);
+
+              panorama = undefined
+              //console.log(panorama)
+              // loadScene(json)
+            }
+          });
+        }
+ else if (list.type === "image") {
+          var infoImage = document.createElement("IMG");
+          infoImage.setAttribute("src", `asset/${list.image}`);
+          infoImage.setAttribute("width", "304");
+          infoImage.setAttribute("height", "228");
+
+          infospot.addHoverElement(infoImage, 150);
+
+        } 
+else if (list.type === "video") {
+
+          var infoVideo = document.createElement('iframe');
+
+          infoVideo.src = `asset/${list.video}`;
+          infoVideo.width = "304";
+          infoVideo.height = "228";
+          // infoVideo.autoplay = true;
+          infospot.addHoverElement(infoVideo, 150);
+        }
+        else if (list.type === "text") {
+          infospot.addHoverText(list.text)
+
+        }
+            // Ankit +++++ END
+            panorama.add(infospot);
+        })
+        setTimeout(() => {
+            if(hotspot_json.length-1 === index){
+                //alert("done")
+                setTimeout(function() {updateView();}, 1000);
+                panorama.toggleInfospotVisibility(false, 1000)
+                //console.log('hide');
+                //nsole.log(hotspot_json);
+                // setTimeout(() => {panorama.toggleInfospotVisibility(true, 1000)},2000 )
+                setTimeout(() => {
+                 // console.log('show');
+                  panorama.toggleInfospotVisibility(true, 1000)
+                }, 1500);
+    
+    
+            
+         }
+        }, 1000);
+      
+     
+
+        })
+        
+    }
+
+    loadHotspot();
+
+        // panorama.addEventListener('progress', onProgressUpdate);
+        viewer_main.add(panorama);
+        // Getting Object Of Main View Canvas
+        var canvas = document.getElementsByTagName("canvas")[0];
+        
+         canvas.addEventListener('mousedown', function (event) {
+         enableMoveCanvas = false
+         })
+         canvas.addEventListener('mousemove', function (event) {
+           
+            enableMoveCanvas = true;
+         })
+          canvas.addEventListener('mouseup', function (event) {
+           
+            if(enableClickCanvas && !enableMoveCanvas){
+               // alert('mouseup')
+             
+               //Getting Position On onClick Event
+               //alert('clicked');
+               //createmarker();
+              clickedPos = viewer_main.getPosition();
+              
+             
+             // hotspot_json.push({x:clickedPos.x,y:Number(clickedPos.y), z:Number(clickedPos.z)})
+              //console.log(hotspot_json);
+              popup.style.display = "block";
+              //enableClickCanvas = false;
+
+              $('#hotspots').modal('show');
+              $('#XValue').val(clickedPos.x);
+              $('#YValue').val(clickedPos.y);
+              $('#ZValue').val(clickedPos.z);
+              var viewId = $('#viewIdValue').val();
+              $('#hotspotViewIdValue').val(viewId);
+              var hotspotTypeVal = $('#hotspotTypeVal').val();
+
+              
+                if(hotspotTypeVal=='1')
+                {
+                    $('#viewsOptions').html('');
+                    $('#viewsOptions').html(viewHotspotData);
+                }
+                else if(hotspotTypeVal=='2')
+                {
+                    $('#viewsOptions').html('');
+                    $('#viewsOptions').html(inventoryImageData);
+                    
+                }
+                else if(hotspotTypeVal=='3')
+                {
+                    $('#viewsOptions').html('');
+                    $('#viewsOptions').html(inventoryVideoData);
+                    
+                }
+                else if(hotspotTypeVal=='4')
+                {
+                    $('#viewsOptions').html('');
+                    $('#viewsOptions').html('<h4>Add Text(Please enter 50 words)</h4><input type="text" name="hotspot_data" class="form-control" id="hotspotDataVal" />');
+                    
+                }
+                else if(hotspotTypeVal=='5')
+                {
+                    $('#viewsOptions').html('');
+                    
+                }
+
+                //reloadHotspot();
+            }
+         })
+
+        function reloadHotspot() {
+          hotspot_json.map((list, index) => {
+            //If You Want To Add Image => Replace  PANOLENS.DataImage.Info
+            var defaultIcon = '';
+            console.log(hotspot_json);
+            if(list.type=='1')
+            {
+               defaultIcon  = '/uploads/projectsinventory/hotspot.png';
+            } else if(list.type=='2')
+            {
+                defaultIcon = '/uploads/projectsinventory/image.png';
+            } else if(list.type=='3')
+            {
+                defaultIcon = '/uploads/projectsinventory/video.png';
+            } else if(list.type=='4')
+            {
+                defaultIcon = '/uploads/projectsinventory/text.png';
+            } else {
+                defaultIcon = PANOLENS.DataImage.Info;
+            }
+            
+            var infospot = new PANOLENS.Infospot(350, defaultIcon, false);
+            infospot.position.set(list.x, list.y, list.z);
+
+ // from Ankit Start
+        if (list.type === "trigger") {
+          infospot.addEventListener('click', function () {
+            var tempindex = hotspot_json.find(x => x.id === list.trigger)
+            if (tempindex) {
+
+              loadindex = hotspot_json.indexOf(tempindex);
+              //console.log(panorama)
+              viewer_main.remove(panorama);
+              
+              var tempcanvas = document.getElementsByClassName('panolens-container')[0].childNodes[0];
+              var tempdiv = document.getElementsByClassName('panolens-container')[0].childNodes[1];
+              document.getElementsByClassName('panolens-container')[0].innerHTML = ""
+              document.getElementsByClassName('panolens-container')[0].appendChild(tempcanvas);
+              document.getElementsByClassName('panolens-container')[0].appendChild(tempdiv);
+
+              panorama = undefined
+              //console.log(panorama)
+              // loadScene(json)
+            }
+          });
+        }
+        else if (list.type === "image") {
+          var infoImage = document.createElement("IMG");
+          infoImage.setAttribute("src", `asset/${list.image}`);
+          infoImage.setAttribute("width", "304");
+          infoImage.setAttribute("height", "228");
+
+          infospot.addHoverElement(infoImage, 150);
+
+        } 
+        else if (list.type === "video") {
+
+          var infoVideo = document.createElement('iframe');
+
+          infoVideo.src = `asset/${list.video}`;
+          infoVideo.width = "304";
+          infoVideo.height = "228";
+          // infoVideo.autoplay = true;
+          infospot.addHoverElement(infoVideo, 150);
+        }
+        else if (list.type === "text") {
+          infospot.addHoverText(list.text)
+
+        }
+// Ankit End
+
+            // Remove Hotspot
+            // infospot.addEventListener('click', function () {
+            //   infospot.dispose();
+            //   hotspot_json.splice(index, 1)
+            // })
+            // Adding Hotspot 
+            panorama.add(infospot);
+            if (hotspot_json.length === index + 1) {
+                setTimeout(function() {
+                   updateView();
+                }, 1000)
+               
+            }
+          })
+        }
+
+        //Update View Function
+        function updateView() {
+
+          console.log("Called Update View ..!!!")
+
+          viewer_main.remove(panorama);
+          viewer_main.add(panorama);
+          viewer_main.setPanorama(panorama)
+        }
+
+        //After Clicking Done Event
+        function doneEvent() {
+          popup.style.display = "none";
+          if (temp_hotspot != "") {
+            hotspot_json.push({ "x": clickedPos.x, "y": Number(clickedPos.y), "z": Number(clickedPos.z), "img": temp_hotspot })
+            setTimeout(() => reloadHotspot(), 100)
+          }
+          temp_hotspot = ""
+        }
+      
+    </script>
+
+    <!-- Add view Process -->
+    <script type="text/javascript">
+        
+
+        function addview()
+        {
+            var viewname = $('#viewname').val();
+            var projectId = $('#project_id').val();
+            var data = $('#data'+globalI).val();
+            var view_filetype = $('#datatypeValue'+globalI).val();
+
+
+
+            if(viewname=='' || data==undefined)
+            {
+                alert("Please enter view name and select image/video for adding new view.");
+                //$('#viewname').css('border-color','red');
+                //$('.viewinputs').css('border-color','red');
+                return false;
+            } else {
+                
+
+                $.ajax({
+                  url: '/projects/addview',
+                  type: 'POST',
+                  data: { viewname:viewname,projectId:projectId,data:data,view_filetype:view_filetype },
+                  success: function(res)
+                  {
+
+                     if(res.msg=='Success')
+                     {
+
+                        $('#addViewModal').modal('hide');
+
+                        document.getElementById('viewname').value=null;
+                        document.getElementById('data'+globalI).checked=false;
+                        getViews();
+                        toastr.success('View saved.');
+                     }
+                  }
+                });
+            }
+        }
+    </script>
+
+    <!-- Add hotspot Process -->
+    <script>
+        var hotspotGlobalVal;
+        function hotspotImgVal(i)
+        {
+            hotspotGlobalVal=i;
+        }
+
+        function saveHotspot()
+        {
+            
+            viewer_main.remove(panorama);
+           var viewId =  $('#hotspotViewIdValue').val();
+            //alert(globalI);
+            var hotspotIcon = $('#hotspotIcon'+globalI).val();
+            //alert(viewId);
+            
+            //alert(hotspotIcon);
+            // hotspot_json.push({x:clickedPos.x,y:Number(clickedPos.y), z:Number(clickedPos.z), img:hotspotIcon})
+             //console.log(hotspot_json)
+            // loadHotspot();
+            //alert('harshita');
+            // /alert($('#hotspotIcon'+globalI).val());
+            var hotspotTypeVal = $('#hotspotTypeVal').val();
+            
+            
+            var hotspotDataVal;
+
+            if(hotspotTypeVal=='1' || hotspotTypeVal=='4')
+            {
+                hotspotDataVal = $('#hotspotDataVal').val();
+            } else {
+                hotspotDataVal = $('#hotspotDataVal'+hotspotGlobalVal).val();
+            }
+
+            var hotspottitle = $('#hotspottitle').val();
+            var msgText = '';
+            //alert('hotspotTypeVal '+hotspotTypeVal);
+            //alert('hotspottitle '+hotspottitle);
+           // alert('hotspotDataVal '+hotspotDataVal);
+
+            if(hotspottitle=='' || hotspotDataVal==undefined)
+            {
+                
+                
+                if(hotspotTypeVal=='1')
+                {
+                    msgText = 'select view.';
+                } else if(hotspotTypeVal=='2')
+                {
+                    msgText = 'select image.';
+                } else if(hotspotTypeVal=='3')
+                {
+                    msgText = 'select video.';
+                } else if(hotspotTypeVal=='4')
+                {
+                    msgText = 'add text.';
+                } 
+
+                
+                $('#hotspottitle').css('border-color','red');
+                $('#hotspotDataVal').css('border-color','red');
+                alert('Please enter title and '+msgText);
+                return false;
+            } else {
+                hotspotDataVal = hotspotDataVal.replace(/(^\s*)|(\s*$)/gi,"");
+                 hotspotDataVal = hotspotDataVal.replace(/[ ]{2,}/gi," ");
+                 hotspotDataVal = hotspotDataVal.replace(/\n /,"\n");
+                //alert(hotspotDataVal.split(' ').length);
+                if(hotspotDataVal.split(' ').length>50)
+                {
+                    alert('Please enter 50 words only.');
+                    return false;
+                }
+                //return false;
+                $('#hotspottitle').css('border-color','none');
+                $('#hotspotDataVal').css('border-color','none');
+
+                $.ajax({
+                    url: '/projects/addhotspot',
+                    type: 'POST',
+                    data:  $("#addhotspotform").serialize(),
+                    success: function(res)
+                    {
+                        if(res.msg=='Success')
+                        {
+                            findHotspots(viewId);
+                            console.log('Saved');
+                            $('#hotspots').modal('hide');
+                            $('#hotspottitle').val('');
+                            $('.hotspotIconInventory').prop('checked', false);
+                            getViews();
+                            //$('#viewsOptions').html('');
+                            toastr.success('Hotspot saved.');
+
+                        }
+                    }
+                });
+            }
+            
+        }
+    </script>
+
+    <!-- Update audio for view -->
+    <script type="text/javascript">
+        function saveAudio()
+        {
+            $('#webviewPreview').css('display','none');
+            var custom_audio = '';
+            if($('#custom_audio_none').is(':checked'))
+            {
+               custom_audio = '';
+            } else{
+                if(hotspotGlobalVal==undefined)
+                {
+                    custom_audio = $('#currentAudioVal').val();
+                } else{
+                    custom_audio = $('#custom_audio'+hotspotGlobalVal).val();
+                }
+            }
+
+            //alert(custom_audio);
+
+            var ismuted = '';
+            if ($('#videoSound').is(":checked"))
+            {
+                ismuted = 1;
+            } else {
+                ismuted = 0;
+
+            }
+            //var custom_audio = $('#custom_audio'+hotspotGlobalVal).val();
+            var viewId = $('#viewIdValueAudio').val();
+            $.ajax({
+                  url: '/projects/add-audio',
+                  type: 'POST',
+                  data: { ismuted:ismuted,custom_audio:custom_audio, viewId:viewId},
+                  success: function(res)
+                  {
+                     if(res.msg=='Success')
+                     {
+                        autoselectAduio(custom_audio);
+                        $('#audioHotspots').modal('hide');
+                        getViews();
+                        toastr.success('Audio saved.');
+                     }
+                  }
+                });
+        }
+    </script>
+
+
+    <!-- For finding values of X,Y coordinates -->
+    <!-- For tooltip -->
+    <script type="text/javascript">
+        //tooltips
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        //inventory-sidebar
+        $('.scr-opt-toggel').on('click', function() {
+            $('.screen-opt').toggleClass('open');
+        });
+    </script>
+        
+    
+
+    <!-- on page load fetch inventory and views data -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            getInventory();            
+            getViews();
+            $('#savewebview').css('display','none');
+            $('#webviewPreview').css('display','none');
+            $('#export').css('display','none');
+        });
+    </script>
+    
+      <!-- Add fetch all inventory data -->
+    <script type="text/javascript">
+        var inventoryImageData = '';
+        var inventoryVideoData = '';
+        //var inventoryAudioData='';
+        var projectInventoryExists = '0';
+        function getInventory()
+        {
+
+            $.ajax({
+                  url: '/projects/fetchInventoryData',
+                  type: 'POST',
+                  data: {projectId:<%= projectId %> },
+                  success: function(res)
+                  {
+                    if(res.msg=='Success')
+                    {
+                        var inventoryCompleteData = '';
+                        var inventoryModalData = '';
+                        var inventoryIconData = '';
+
+                        inventoryImageData += '<h4>Select Image</h4><ul class="g-list">';
+                        inventoryIconData += '<h4>Select Icon</h4><ul class="g-list">';
+                        inventoryVideoData += '<h4>Select Video</h4><ul class="g-list">';
+                        //inventoryAudioData += '<h4>Select Audio</h4><ul class="g-list">';
+                        // if(customAudio=='')
+                        // {
+                        //     inventoryAudioData +=  '<li>None <input type="radio" id="custom_audio_none" name="custom_audio" checked  value=""><img src="/images/music.png" style="width: 50px; height: 50px;">&nbsp;</li>'
+                        // } else{
+                        //     inventoryAudioData +=  '<li>None <input type="radio" id="custom_audio_none" name="custom_audio"  value=""><img src="/images/music.png" style="width: 50px; height: 50px;">&nbsp;</li>'
+                        // }
+
+                        
+
+                        if(res.inventory.length>0)
+                        {
+                            $.each(res.inventory, function(data, val) {                             
+
+                                inventoryCompleteData += '<li><div class="list_wrapper">';
+
+                                if(val.filetype==1)
+                                { 
+                                    if(val.default_inventory==1)
+                                    {
+                                        inventoryCompleteData += '<div class="i_holder"><img class="default" alt="" src="/uploads/projectsinventory/'+val.filename+'"></div><span><i class="mdi mdi-image-size-select-actual"></i>Icon</span></div>';
+                                    } else{
+                                        inventoryCompleteData += '<div class="i_holder"><img alt="" src="/uploads/projectsinventory/'+val.filename+'"></div><span><i class="mdi mdi-image-size-select-actual"></i>Image</span></div>';
+                                    }
+                                    
+                                } else if(val.filetype==2)
+                                {
+                                    inventoryCompleteData += '<div class="i_holder"><img src="/uploads/projectsinventory/'+val.thumbnail+'"></div><span><i class="mdi mdi-video"></i>Video</span></div>';
+                                } else if(val.filetype==3)
+                                {
+                                    inventoryCompleteData += '<div class="i_holder"><img src="/images/audio.jpg"></div><span><i class="mdi mdi-music"></i>Audio</span></div>';
+                                }
+
+                                if(val.default_inventory=='0')
+                                {
+                                    inventoryCompleteData += '<a class="editor" onclick="return confirm(\'Are you sure you want to delete inventory?? This will delete all its related views and hotspots.\')" href="/projects/delete-project-inventory/'+val.id+'/<%= projectId %>/'+val.filename+'/'+val.filetype+'"><div class="btn-group btn-group-sm" style="float: none;"><button type="button" id="deleteInventory" class="tabledit-delete-button btn btn-sm btn-danger"><span class="ti-trash"></span></button></div></a>';
+                                }
+                                
+
+                                inventoryCompleteData += '<p class="pt-2 mb-1 text-dark">'+val.original_filename+'</p></li>';
+                                var ext = val.filename; 
+                                var extension = ext.substring(ext.lastIndexOf('.') + 1); 
+                                if(val.default_inventory=='0' && val.filetype!=3)
+                                {
+                                    projectInventoryExists = '1';
+                                    if(extension != "gif"){
+                                        inventoryModalData += '<li><div><input type="hidden" value="'+val.filetype+'" id="datatypeValue'+val.id+'" name="view_filetype"><input type="radio" onchange="radioId('+val.id+')" name="data" value="'+val.filename+'" id="data'+val.id+'" required><span class="checkmark"></span>';
+                                    }
+
+                                        if(val.filetype==1)
+                                        {
+                                            if(extension != "gif"){
+                                                inventoryModalData += '<img src="/uploads/projectsinventory/'+val.filename+'" alt="">';
+                                            }
+                                        } else if(val.filetype==2)
+                                        {
+                                            inventoryModalData += '<img src="/uploads/projectsinventory/'+val.thumbnail+'" alt="">';
+                                        }
+                                    if(extension != "gif"){
+                                        inventoryModalData += '</div><p>'+val.original_filename+'</p></li>';
+                                    }
+                                   // console.log(val.original_filename);
+
+                                } 
+            
+
+                                if(val.filetype==1)
+                                {
+                                    inventoryIconData += '<li><div><input type="radio" class="hotspotIconInventory" onchange="radioId('+val.id+')" name="hotspot_icon" value="'+val.filename+'" id="hotspotIcon'+val.id+'">';
+
+                                    // icon image inventory data for hotspot modal
+                                    // rohit
+                                     inventoryIconData += '<span class="checkmark"></span><img src="/uploads/projectsinventory/'+val.filename+'" alt=""></div></li>';
+
+                                    // image inventory data for hotspot modal
+                                    if(val.default_inventory=='0'){
+                                        inventoryImageData += '<li><div><input type="radio" class="hotspotIconInventory" name="hotspot_data" value="'+val.filename+'" onchange="hotspotImgVal('+val.id+')" id="hotspotDataVal'+val.id+'" ><span class="checkmark"></span><img src="/uploads/projectsinventory/'+val.filename+'" alt=""></div></li>';
+                                    } 
+                                    
+                                }
+
+
+                                if(val.filetype==2)
+                                {
+                                    // icon video inventory data for hotspot modal
+                                    // inventoryIconData += '<video src="/uploads/projectsinventory/'+val.filename+'" ></video></li>';
+
+                                    // video inventory data for hotspot modal
+                                    if(val.default_inventory=='0'){
+                                        inventoryVideoData += '<li><div><input type="radio" class="hotspotIconInventory" onchange="hotspotImgVal('+val.id+')" name="hotspot_data" value="'+val.filename+'" id="hotspotDataVal'+val.id+'"><span class="checkmark"></span><img src="/uploads/projectsinventory/'+val.thumbnail+'" alt=""></div></li>';
+                                    }   
+                                }
+
+                                //inventoryAudioData +='<li>';
+
+                                // if(val.filetype==3)
+                                // {
+                                //     // icon video inventory data for hotspot modal
+                                //     if(customAudio==val.filename)
+                                //     {
+                                //         inventoryAudioData += val.original_filename+'<input type="radio" onchange="hotspotImgVal('+val.id+')" id="custom_audio'+val.id+'" name="custom_audio" value="'+val.filename+'" checked><img src="/images/music.png" style="width: 50px; height: 50px;">&nbsp;';
+                                //     } else{
+                                //         inventoryAudioData += val.original_filename+'<input type="radio" onchange="hotspotImgVal('+val.id+')" id="custom_audio'+val.id+'" name="custom_audio" value="'+val.filename+'" ><img src="/images/music.png" style="width: 50px; height: 50px;">&nbsp;';
+                                //     }
+                                    
+
+                                // }
+
+                                //inventoryAudioData +='</li>';
+
+
+                            });
+
+                            inventoryVideoData += '</ul>';
+                            inventoryImageData += '</ul>';
+                            inventoryIconData += '</ul>';
+                            //inventoryAudioData += '</ul>';
+
+                            $('#hotspotData').html(inventoryIconData);
+                            if(projectInventoryExists==1)
+                            {
+                                $('#inventory_view').html(inventoryModalData);
+                            } else{
+                                $('#inventory_view').html('Inventory for this project not found.');
+                            }
+                            
+                            $('#list_of_inventory').html(inventoryCompleteData);
+                        } else {
+                            $('#hotspotData').html('Inventory not found');
+                            $('#inventory_view').html('Inventory not found');
+                            $('#list_of_inventory').html('Inventory not found');
+                        }
+                    }
+                  }
+            });
+        }
+    </script>
+
+    <!-- Fetch all views data -->
+    <script type="text/javascript">
+        var scncount = 0;
+        var viewHotspotData = '';
+        function getViews()
+        {
+            $.ajax({
+                url: '/projects/fetchViewData',
+                type: 'POST',
+                data: {projectId:<%= projectId %> },
+                success: function(res)
+                {
+                    viewHotspotData = ''; 
+                    if(res.msg=='Success')
+                    {
+                       // console.log(res.views);
+                        var viewCompleteData = '';
+                        viewHotspotData += '<h4 class="mt-4">Select View</h4><select id="hotspotDataVal" name="hotspot_data" class="form-control w-25"><option value="">Select View Image</option>';
+
+                        if(res.views.length>0)
+                        {
+                            $('#savewebview').css('display','block');
+                            ///console.log(res.views);
+                            $.each(res.views, function(data, val) {
+                                //console.log(val.hotspot);
+
+                                viewCompleteData+='<div class="nested-accordion"><div id="'+val.id+'" class="d-v-center nested-wrapper viewdiv'+val.id+'"><h3 data-toggle="collapse" data-target="#demo'+val.id+'">';
+
+                                if(val.view_filetype=='1')
+                                {
+                                    viewCompleteData+='<img src="/uploads/projectsinventory/'+val.data+'" class="mr-1">';
+                                } 
+                                else{
+                                    viewCompleteData+='<video src="/uploads/projectsinventory/'+val.data+'" class="mr-1"></video>';
+                                }
+
+
+                                viewCompleteData+='<span class="nested-title">'+val.viewname+'</span></h3><a onclick="updateBackground(\''+val.data+'\', \''+val.viewname+'\', '+val.view_filetype+', '+val.id+', '+val.ismuted+',\''+val.custom_audio+'\')" href="#" class="btn btn-dark btn-xs mr-2" data-toggle="tooltip" title="Apply" data-original-title="Apply"><i class="mdi mdi-check"></i></a><a onClick="deleteViews(<%= projectId %>,'+val.id+')" data-toggle="tooltip" title="Delete" data-original-title="Delete" class="btn btn-danger btn-xs"><i class="mdi mdi-delete"></i></a></div><div class="collapse" id="demo'+val.id+'"><div class="inner-nested-accordion">';
+
+                                $.each(val.hotspot, function(hotspotdata, hotspotval) {
+                                    var hotspot_type;
+                                    var hotspot_icon;
+                                    var hotspot_text;
+
+
+                                    switch(hotspotval.hotspot_type) {
+                                          case 1:
+                                          // code block
+                                          hotspot_type  = 'Hotspot';
+                                          hotspot_icon  = '<icon class="fa fa-link"></icon>';
+                                          hotspot_text  = '';
+                                          break;
+                                          case 2:
+                                            // code block
+                                            hotspot_type  = 'Image';
+                                            hotspot_icon  = '<icon class="fa fa-image"></icon>';
+                                            hotspot_text  = '';
+                                            break;
+                                          case 3:
+                                            // code block
+                                            hotspot_type  = 'Video';
+                                            hotspot_icon  = '<icon class="fa fa-video"></icon>';
+                                            hotspot_text  = '';
+                                            break;
+                                          case 4:
+                                            // code block
+                                            hotspot_type  = 'Text';
+                                            hotspot_icon  = '<icon class="fa fa-text-height"></icon>';
+                                            hotspot_text  = hotspotval.hotspot_data;
+                                            break;
+                                          case 5:
+                                            // code block
+                                            hotspot_type  = 'Audio';
+                                            hotspot_icon  = '<icon class="fa fa-music"></icon>';
+                                            hotspot_text  = '';
+                                            break;
+                                    }
+                                   
+                                    viewCompleteData+= '<div class="inner-wraper"><h3 class="d-v-center" data-toggle="collapse1" data-target="#demohotspot'+hotspotval.id+'"> '+hotspot_icon+' '+hotspotval.hotspot_title+'</h3><span class="edix dripicons-pencil"></span><a onClick="deleteHotspot(<%= projectId %>,'+hotspotval.id+')" class="delx dripicons-trash"></a></div><div id="demohotspot'+hotspotval.id+'" class="collapse"></div></div><div class="inner-nested-accordion">';
+
+                                });
+                                viewCompleteData += '</div></div></div>';
+                                viewHotspotData += '<option value="'+val.id+'">'+val.viewname+'</option>';
+                            });
+
+                            viewHotspotData += '</select>';
+
+                            $('#list_of_views').html(viewCompleteData);
+                        } else {
+                            $('#list_of_views').html('Views not found.');
+                        }
+
+                        var element = document.getElementById('list_of_views');
+                        scncount = element.childElementCount;
+                        console.log("scene count data"+scncount);
+
+                        // //tooltips
+                        // $(document).ready(function() {
+                        //     $('[data-toggle="tooltip"]').tooltip();
+                        // });
+
+                        // // show selected images in add view modal
+                        // $(function() {
+                        //     //g-list-select
+                        //     $("ul.g-list li").click(function() {
+                        //       $("li").removeClass("activ_e");
+                        //       $(this).addClass("activ_e");
+                        //     });
+                        // });
+                    }
+                }
+            });
+        }
+    </script>
+    <script>
+        function deleteViews(projectId,viewId)
+        {   
+            //alert('hello')
+            var confirmValue = confirm("Are you sure you want to delete views??");
+
+            if(confirmValue==true){
+                $.ajax({
+                    url: '/projects/delete-views/'+projectId+'/'+viewId,
+                    type: 'GET',
+                    success: function(res)
+                    {
+                        if(res.msg=='Success')
+                        {
+                            getViews();
+                            toastr.success('Views deleted.');
+
+                        }
+                    }
+                });
+            } 
+        }
+    </script>
+    <script>
+        function deleteHotspot(projectId,hotspotId)
+        {
+            
+            var confirmValue = confirm("Are you sure you want to delete hotspot??");
+            
+
+            if(confirmValue==true){
+                $.ajax({
+                    url: '/projects/delete-hotspot/'+projectId+'/'+hotspotId,
+                    type: 'GET',
+                    success: function(res)
+                    {
+                        if(res.msg=='Success')
+                        {
+                            getViews();
+                            toastr.success('Hotspot deleted.');
+
+                        }
+                    }
+                });
+            } 
+
+        }
+    </script>
+    <script>
+        var enableClickCanvas=false;
+        var enableMoveCanvas=false;
+        function createmarker(hotspot_type)
+        {
+
+            enableClickCanvas=true;
+            enableMoveCanvas=false;
+            $('.hotspotbtn').removeClass('activesvg');
+            $('.hotspot_'+hotspot_type).addClass('activesvg');
+            $('#hotspotTypeVal').val(hotspot_type);
+
+            if(hotspot_type==5)
+            {
+                $('#audioHotspots').modal('show');
+                $('#audioFiles').html('');
+                $('#audioFiles').html(inventoryAudioData);
+            }
+        }
+    </script>
+
+    <!-- Add Inventory Modal Close -->
+    <script type="text/javascript">
+        function closeInventoryModal()
+        {
+            $('#addInventoryModal').modal('hide');
+        }
+    </script>
+
+    
+
+    
+</body>
+</html>

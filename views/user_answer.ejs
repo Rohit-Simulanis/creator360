@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+   <%- include('partials/header') %>
+   <body>
+      <div class="page-wrapper">
+        <!-- Page Content-->
+        <div class="page-content">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="mt-0 header-title text-center">Submit your answer</h4>
+                                    <hr />
+                                    <form action="/match-answer" method="post"
+                                    id="matchanswer">
+                                    <input type="hidden" name="userId" value="<%= userId %>">
+                                    <% if(data.length>0) { %>
+                                        <% for(var i=0; i<data.length; i++) {%>
+                                            <input type="hidden" name="question" value="<%= data[i].id %>">
+                                            <p>
+                                                <%= data[i].question %>
+                                            </p>
+                                            <div id="firstq">
+                                                <input class="form-control" type="text" name="<%= data[i].id %>"
+                                                    id="<%= data[i].id %>" value=""
+                                                     placeholder="Write answer here*" required>
+                                            </div>
+                                            <% } %>
+                                                <button class="btn btn-primary mt-4">Submit</button>
+                                                <% } else { %>
+                                                    <div>Questions not found.</div>
+                                                    <% } %>
+                                </form>
+                                
+                                </div>
+                            </div>
+                            <!--end card-body-->
+                        </div>
+                        <!--end card-->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+
+                <div class="text-center mt-2">
+                    <a href="/"><i class="ti-angle-left" style="color: #50649c;"></i> Back to Home</a>
+                </div>
+                
+            </div><!-- container -->
+            <%- include('partials/footer') %>
+            <!--end footer-->
+         </div>
+         <!-- end page content -->
+      </div>
+      <!-- end page-wrapper -->
+      <script type="text/javascript">
+        $(document).ready(function () {
+            $('#changePassword').validate({ // initialize the plugin
+                rules: {
+                    newPassword: {
+                        required: true,
+                    },
+                    confirmPassword: {
+                        required: true,
+                        equalTo : "#newpassword"
+                    }
+                },
+                messages: {
+                    newPassword: {
+                        required: "New password is required.",
+                    },
+                    confirmPassword: {
+                        required: "Confirm password is required.",
+                        equalTo: "The new password and confirm password do not match.",
+                    }
+                }
+            });
+        });
+    </script>
+   </body>
+</html>

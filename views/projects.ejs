@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<%- include('partials/header') %>
+   <body>
+      <!-- Top Bar Start -->
+      <%- include('partials/top-bar') %>
+      <!-- Top Bar End -->
+      <div class="page-wrapper">
+         <!-- Left Sidenav -->
+       <%- include('partials/side-bar') %>
+         <!-- end left-sidenav-->
+         <!-- Page Content-->
+         <div class="page-content">
+            <div class="container-fluid">
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="float-right">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active">Projects</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Projects</h4>
+                        </div>
+                        <!--end page-title-box-->
+                    </div>
+                    <!--end col-->
+                </div><!-- end page title end breadcrumb -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-v-center justify-content-between">
+                                    <h3 class="mt-0">Projects List</h3>
+                                </div>
+                                <div class="table-rep-plugin">
+                                    <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                        <table id="tech-companies-1" class="table table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>S. No.</th>
+                                                    <th>User Name</th>
+                                                    <th>Project Name</th>
+                                                    <th>Version</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            <% if(data.length>0) { %>
+                                            <% for(var i=0; i<data.length; i++) {%>
+                                            <tr>
+                                                <td><%= i+1 %></td>
+                                                <td><%= data[i].username %></td>
+                                                <td><%= data[i].projectName %></td>
+                                                <td><%= data[i].version %></td>
+                                                <td>
+                                                    <% if(data[i].status==1) { %>
+                                                    <label class="badge badge-success">Active</label>
+                                                    <% } else { %>
+                                                    <label class="badge badge-warning">Inactive</label>
+                                                    <% } %>
+                                                </td>
+                                                <!-- <td><%= data[i].company_profile %></td>
+                                                <td><%= data[i].professional_title %></td>
+                                                <td><%= data[i].phone_number %></td> -->
+                                                
+                                                <td>
+                                                   <!--  <a href="#" data-toggle="modal" data-target="#add-project<%= data[i].id %>" class="btn-purple btn btn-sm"><i class="icon-plus icons"></i> Add Project</a>
+                                                    <a href="/projects/<%= data[i].id %>" class="btn-purple btn btn-sm"><i class="icon-eye icons"></i> View Projects</a>
+                                                    <a href="/users/delete/<%= data[i].id %>" onclick="return confirm('Are you sure you want to delete this??');" class="btn btn-danger btn-sm trash" title="Delete User"><i class="fa icon-trash text-light"></i></a> -->
+                                                    <a href="/projects/view360/<%= data[i].id %>" data-toggle="tooltip" data-original-title="Create tour" class="btn-purple btn btn-sm"><i class="icon-plus icons"></i> Create 360 tour</a>
+                                                    <a href="/projects/edit-project/<%= data[i].id %>" data-toggle="tooltip" data-original-title="Edit Project" class="btn-primary btn btn-sm"><i class="ti-pencil"></i></a>
+                                                </td>
+                                            </tr>
+                                            <% } %>
+                                            <% } else { %>
+                                                <tr><td colspan="6" class="text-center">Projects not found.</td></tr>
+                                            <% } %>
+                                        </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- container -->
+           <%- include('partials/footer') %>
+            <!--end footer-->
+         </div><!-- end page content -->
+         <!-- end page content -->
+      </div>
+      <!-- end page-wrapper -->
+      <!-- jQuery  -->
+   </body>
+</html>

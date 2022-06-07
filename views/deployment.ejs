@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<%- include('partials/header') %>
+<link href="/stylesheets/dropzone.min.css" rel="stylesheet"/>
+
+<body>
+    <!--loader image-->
+                <div id="loading-image" class="loader-wrappr">
+                    <svg class="load-center" version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+    <path fill="#fff" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+      <animateTransform 
+         attributeName="transform" 
+         attributeType="XML" 
+         type="rotate"
+         dur="1s" 
+         from="0 50 50"
+         to="360 50 50" 
+         repeatCount="indefinite" />
+  </path>
+</svg>
+                
+            </div>
+    <!-- Top Bar Start -->
+    <%- include('partials/top-bar') %>
+    <!-- Top Bar End -->
+    <div class="page-wrapper">
+        <!-- Left Sidenav -->
+        <%- include('partials/side-bar') %>
+        <!-- end left-sidenav-->
+        <!-- Page Content-->
+        <div class="page-content">
+            <div class="container-fluid">
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="float-right">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active">Projects</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Deployment</h4>
+                        </div>
+                        <!--end page-title-box-->
+                    </div>
+                    <!--end col-->
+                </div><!-- end page title end breadcrumb -->
+                
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-v-center justify-content-between">
+                                    <h3 class="mt-0">Deployment List</h3>
+                                </div>
+                                <div class="table-rep-plugin">
+                                    <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                        <table id="tech-companies-1" class="table table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>S. No.</th>
+                                                    <th>Project Name</th>
+                                                    <th>Version</th>
+                                                    <!-- <th>Status</th> -->
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% if(data.length>0) { %>
+                                                <% for(var i=0; i<data.length; i++) { %>
+                                                <tr>
+                                                   <td><%= i+1 %></td>
+                                                    <td><%= data[i].projectName %></td>
+                                                    <td><%= data[i].version %></td>
+                                                    <!-- <td>
+                                                        <% if(data[i].status==1) { %>
+                                                        <label class="badge badge-success">Active</label>
+                                                        <% } else { %>
+                                                        <label class="badge badge-warning">Inactive</label>
+                                                        <% } %>
+                                                    </td> -->
+                                                    <td>
+                                                        <!-- <a href="#" onclick="fetchViews(<%-data[i].id %>,1,<%-data[i].web %>,<%-data[i].android %>)" class="btn-success btn" data-toggle="modal" data-animation="bounce" data-target=".view-build"><i class="ti-android"></i> Oculus Go</a> -->
+                                                        <!-- <a href="#"  class="btn-primary btn" data-toggle="modal    -" data-animation="bounce" data-target=".view-build"><i class="ti-apple"></i> IOS</a>
+                                                        <a href="#"  class="btn-purple btn" data-toggle="modal    -" data-animation="bounce" data-target=".view-build"><i class="ti-window   -"></i> Windows</a> -->
+                                                        <a href="/projects/preview-webview/<%= data[i].id %>" target="_blank" class="btn-purple btn" ><i class="ti-world"></i> Web View</a>
+                                                        <!--
+                                                        <ul class="d-v-center">
+                                                            <li class="mr-2"><a href="#" class="btn-success  btn" data-toggle="tooltip" data-original-title="Android"><i class="ti-android"></i></a></li>
+                                                            <li class="mr-2"><a href="#" class="btn-dark btn" data-toggle="tooltip" data-original-title="Android"><i class="ti-apple"></i></a></li>
+                                                            <li class="mr-2"><a href="#" class="btn-primary btn" data-toggle="tooltip" data-original-title="Android"><i class="ti-microsoft"></i></a></li>
+                                                            <li class="mr-2"><a href="#" class="btn-info  btn" data-toggle="tooltip" data-original-title="Android"><i class="ti-desktop"></i></a></li>
+                                                        </ul>-->
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+                                                <% } else { %>
+                                                    <tr><td colspan="5" class="text-center">Projects not found.</td></tr>
+                                                <% } %>
+                                                </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- container -->
+            <%- include('partials/footer') %>
+            <script src="/javascripts/dropzone.min.js"></script>
+            <!--end footer-->
+        </div><!-- end page content -->
+        <!-- end page content -->
+    </div>
+    <!-- end page-wrapper -->
+    <!-- jQuery  -->
+    
+    
+    <!--  inventory-modal -->
+    <div class="modal fade view-build" tabindex="-1" role="dialog" aria-labelledby="view-build" aria-hidden="true" data-backdrop="static" data-keyboard="false" id="addInventoryModal">
+        <div class="modal-dialog  modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title mt-0" id="exampleModalLabel">Android Build Setting</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="mdi mdi-close"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="projectidforbuild">
+                    </div>
+                    <div class="build-grid">
+                        <div class="vp-item">
+                            <div class="pos-rel">
+                               <!-- <button type="button" class="btn btn-blue btn-square waves-effect waves-light s_all" onclick="selectAll()"><i class="mdi mdi-check-all mr-2" ></i>Select All</button> -->
+                                <ul class="m-0 p-0 drg-drp" id="viewsList">
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="vp-item mt-2 mr-1">
+                            <h4 class="mt-0 text-dark">File Upload</h4>
+                           <!-- <div class="dropify-wrapper">
+                            <div class="dropify-message">
+                                <span class="ti-upload"></span> 
+                                <p>Drag and drop a file here or click</p>
+                                <p class="dropify-error">Ooops, something wrong appended.</p>
+                            </div>
+                            <div class="dropify-loader"></div>
+                            <div class="dropify-errors-container"><ul></ul></div>
+                            <input type="file" id="input-file-now" class="dropify">
+                            <button type="button" class="dropify-clear">Remove</button>
+                            <div class="dropify-preview">
+                                <span class="dropify-render"></span>
+                                <div class="dropify-infos">
+                                    <div class="dropify-infos-inner">
+                                        <p class="dropify-filename">
+                                        <span class="file-icon"></span> 
+                                        <span class="dropify-filename-inner"></span></p>
+                                        <p class="dropify-infos-message">Drag and drop or click to replace</p>
+                                    </div>
+                                </div>
+                            </div>
+                            </div> -->
+                            <form id="upload-widget" method="POST" action="/" class="dropzone">
+                              <div class="fallback">
+                                <input name="images" type="file" />
+                              </div>
+                            </form>
+                            <div id="android_response"></div>
+                            <div id="android_json_package_response"></div>
+                        </div>
+                        <div class="vp-item mt-2 ml-1">
+                            <h4 class="text-dark">Platform</h4>
+                            <ul class="m-0 p-0">
+                                <!-- <li class="mb-5">
+                                    <a href="#" class="btn btn-android" id="androidSetup" onclick="androidSetup()"><i  class="ti-android"></i> Setup Package</a>
+                                </li> -->
+                                <li class="mb-5">
+                                    <div id="projectidforpackage">
+                                    </div>
+                                    <button onclick="androidSetup()" class="btn btn-android disabled" id="androidSetupBtn" ><i  class="ti-android"></i> Setup Package</button>
+                                </li>
+                                <li class="mt-5">
+                                    <button onclick="setupAndroidBuild()" id="androidBuild" class="btn btn-success Setup btn-block disabled"><i class="ti-download"></i> Android Build Setup</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.modal-content -->
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        function generateJsonAndroid()
+        {
+            //alert('hello');
+            var projectId = $('#projectIdVal').val();
+            //alert(projectId);
+
+            $.ajax({
+                url: '/projects/generateJsonAndroid',
+                type: 'POST',
+                data: {projectId: projectId},
+                success: function(res)
+                {
+                    if(res.msg=='Success')
+                    {
+                        console.log('success')
+                        var android_json_package_response='<div class="mt-2 alert icon-custom-alert alert-outline-purple alert-purple-shadow" role="alert"><div class="alert-text" id=""><strong>Android Package setup successfully!</strong> You will now build android application in secs.</div></div>';
+                        $('#android_json_package_response').html(android_json_package_response);
+                        $('.Setup').removeClass('disabled');
+                    }
+
+                }
+            });
+        }
+    </script>
+
+    <script type="text/javascript">
+        function fetchViews(projectId,platformId,webViewStatus,androidStatus)  // platform 1=android, 2=IOS, 3=Windows, 4=Web.
+        {
+            if(webViewStatus=='1')
+            {
+                $('#androidSetupBtn').removeClass('disabled');
+            } else{
+                $('#androidSetupBtn').addClass('disabled');
+            }
+
+            if(androidStatus=='1')
+            {
+                $('#androidBuild').removeClass('disabled');
+            } else{
+                $('#androidBuild').addClass('disabled');
+            }
+
+                $('#projectidforbuild').html('<input type="hidden" name="projectId" id="projectIdValue" value="'+projectId+'" />');
+                $('#projectidforpackage').html('<input type="hidden" name="projectId" id="projectIdVal" value="'+projectId+'" />');
+
+
+
+                $.ajax({
+                    url: '/projects/fetchViewData',
+                    type: 'POST',
+                    data: {projectId: projectId },
+                    success: function(res)
+                    {
+                        //alert('success');
+                        if(res.msg=='Success')
+                        {
+
+                            var viewCompleteData = '';
+                            if(res.views.length>0)
+                            {
+                                $.each(res.views, function(data, val) {
+                                    viewCompleteData+='<li><div class="checkbox my-2"><div class="custom-control custom-checkbox"><input type="checkbox" class="custom-control-input allViewsCheckbox" id="customCheck07" data-parsley-multiple="groups" data-parsley-mincheck="2" checked /><label class="custom-control-label" for="customCheck07">'+val.viewname+'</label></div></div></li>';
+                                    });
+                                
+                                $('#viewsList').html(viewCompleteData);
+                                $('#androidSetupBtn').removeAttr('disabled','disabled');
+                                $('#androidBuild').removeAttr('disabled','disabled');
+                            } else {
+                                $('#viewsList').html('Views not found.');
+                                $('#androidSetupBtn').attr('disabled','disabled');
+                                $('#androidBuild').attr('disabled','disabled');
+                            }
+
+                        }
+                    }
+                });
+        }
+    </script>
+
+    <script type="text/javascript">
+
+        function androidSetup()
+        {
+            var projectId = $('#projectIdValue').val();
+            //alert(projectId);
+            $('#loading-image').show();
+            $.ajax({
+                url: '/projects/android_setup',
+                type: 'POST',
+                data: {projectId: projectId},
+                success: function(res)
+                {
+                    $('#loading-image').hide();
+                    if(res.msg=='Success')
+                    {
+
+                        var android_response='<div class="mt-2 alert icon-custom-alert alert-outline-purple alert-purple-shadow" role="alert"><div class="alert-text" id=""><strong>Android setup success!</strong> You will now build android application in secs.</div></div>';
+                        $('#android_response').html(android_response);
+                        $('.Setup').removeClass('disabled');
+                    } else if(res.msg=='Already'){
+                        var android_response='<div class="mt-2 alert icon-custom-alert alert-outline-purple alert-purple-shadow" role="alert"><div class="alert-text" id=""><strong>Android package already created.</div></div>';
+                        $('#android_response').html(android_response);
+                    }
+
+                }
+            });
+        }
+    </script>
+
+    <script type="text/javascript">
+        function setupAndroidBuild()
+        {
+            var projectId = $('#projectIdValue').val();
+            $('#loading-image').show();
+            $.ajax({
+                url: '/projects/android_build_setup',
+                type: 'POST',
+                data: {projectId: projectId},
+                success: function(res)
+                {
+                    if(res.msg=='Success')
+                    {
+                        $('#loading-image').hide();
+                        //console.log('success');  
+                        $('#android_response').html('<div class="mt-2 alert icon-custom-alert alert-success alert-purple-shadow" role="alert"><div class="alert-text" id=""><strong>Android build setup success!</strong> You will now download android apk from downloads.</div></div>');
+                    } else if(res.msg=='Error') {
+                        $('#android_response').html('<div class="mt-2 alert icon-custom-alert alert-danger alert-purple-shadow" role="alert"><div class="alert-text" id=""><strong>Something went wrong.Please try again later.</div></div>');
+                    }
+
+                }
+            });
+        }
+    </script>
+    </body>
+</html>

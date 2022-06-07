@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<%- include('partials/header') %>
+<style>
+    .card-eco .card-eco-icon {
+        font-size: 20px;
+    }
+
+</style>
+
+<body>
+    <!-- Top Bar Start -->
+    <%- include('partials/top-bar') %>
+    <!-- Top Bar End -->
+    <div class="page-wrapper">
+        <!-- Left Sidenav -->
+        <%- include('partials/side-bar') %>
+        <!-- end left-sidenav-->
+        <!-- Page Content-->
+        <div class="page-content">
+            <div class="container-fluid">
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="float-right">
+                                <ol class="breadcrumb">
+                                    <% if(data.length==license_data[0].project_count) {  %>
+                                        <li class="breadcrumb-item inactive">
+                                            <span>Purchase or upgrade your license</span>
+                                            <a href="#" data-toggle="modal" style="pointer-events: none; background-color: #998fb7 !important;" data-target="#add-project" class="float-up btn-purple btn text-light" title="Add Project"><i class="mdi mdi-library-plus"></i> Add Project</a>
+                                        </li>
+                                    <% } else { %>
+                                        <li class="breadcrumb-item active">
+                                            <a href="#" data-toggle="modal" data-target="#add-project" class="float-up btn-purple btn text-light" title="Add Project"><i class="mdi mdi-library-plus"></i> Add Project</a>
+                                        </li>
+                                    <% } %>
+                                </ol> 
+                            </div> 
+                            <h4 class="page-title">Projects</h4>
+                        </div>
+
+                        
+                        <!--end page-title-box-->
+                    </div>
+                    <!--end col-->
+                </div><!-- end page title end breadcrumb -->
+
+                <div class="row">
+
+                  <% if(data.length>0) { %>
+                    <% for(var i=0; i<data.length; i++) { %>
+                    <div class="col-lg-3">
+                        <div class="card card-eco float-up">
+                            <div class="card-body">
+                                <h4 class="title-text mb-0 mt-0">
+                                  <% if(data[i].status==1) { %>
+                                  <label class="badge badge-success">Active</label>
+                                  <% } else { %>
+                                  <label class="badge badge-warning">Inactive</label>
+                                  <% } %>
+                                </h4>
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="font-weight-bold"><%= data[i].projectName %></h5>
+                                    <p class="card-eco-icon text-center ver align-self-center"><span>V.<%= data[i].version %></span>
+                                    </p>
+                                </div>
+                                <div class="button-list">
+                                    <!--<a href="#" data-toggle="modal" data-target="#add-project2" class="btn-purple btn btn-sm"><i class="icon-plus icons"></i> Add Project</a>
+                                    <a href="/projects/2" class="btn-purple btn btn-sm"><i class="icon-eye icons"></i> View Projects</a>
+                                    <a href="/users/delete/2" onclick="return confirm('Are you sure you want to delete this??');" class="btn btn-danger btn-sm trash" title="Delete User"><i class="fa icon-trash text-light"></i></a>-->
+                                    <% if(data[i].status==1) { %>
+                                    <a href="/projects/view360/<%= data[i].id %>" class="btn-purple btn btn-sm" data-toggle="tooltip" data-original-title="Create 360 tour"><i class="icon-plus icons"></i> Create 360 tour</a>
+                                  <% } else { %>
+                                    <a href="/projects/view360/<%= data[i].id %>" class="btn-purple btn btn-sm create-tour-disable" data-toggle="tooltip" data-original-title="Create 360 tour"><i class="icon-plus icons"></i> Create 360 tour</a>
+                                  <% } %>          
+                                    <% if(data[i].license_id != null) { %>
+                                        <a href="http://localhost:8080/" type="submit" class="btn-purple btn btn-sm" data-toggle="tooltip" data-original-title="Create 360 tour" target="_blank"><i class="icon-plus icons"></i> Video Editor</a>
+                                        <a href="/projects/edit-project/<%= data[i].id %>" class="btn-primary btn btn-sm" data-toggle="tooltip" title="" data-original-title="Edit Project"><i class="mdi mdi-circle-edit-outline"></i></a>
+                                        <a href="/projects/delete-project/<%= data[i].id %>"  onclick="return confirm('Are you sure you want to delete this project?')" class="btn-danger btn btn-sm" data-toggle="tooltip" title="" data-original-title="Delete Project"><i class="mdi mdi-trash-can-outline"></i></a> 
+                                    <% } %>
+
+                                </div>
+                            </div>
+                            <!--end card-body-->
+                        </div>
+                        <!--end card-->
+                    </div>
+                    <% } %>
+                    <% } else { %>
+                    <div class="col-lg-3">
+                        Projects not found.
+                    </div>
+                    <% } %>
+                </div>
+                <div class="modal theme-model" id="add-project">
+                                    <div class="modal-dialog modal-dialog-centered modal-md">
+                                        <div class="modal-content">
+                                            <!-- Modal Header -->
+                                            <div class="modal-header text-center">
+                                                <h4 class="modal-title"><i class="mdi mdi-library-plus"></i> Add Project</h4>
+                                                <button type="button" class="close" data-dismiss="modal"><i class="mdi mdi-close"></i></button>
+                                            </div>
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                <form class="mt-3" action="/projects/add" method="post" id="projectAdd">
+                                                    <input type="hidden" name="userId" value="<%= login_id %>">
+                                                    <div class="form-group">
+                                                        <label>Project Name</label>
+                                                        <input class="form-control" type="text" name="projectName" placeholder="Project Name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Application Name (This would your application name)</label>
+                                                        <input class="form-control" type="text" name="application_name" placeholder="Application Name">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Version</label>
+                                                        <input class="form-control" type="text" name="version" placeholder="Version">
+                                                    </div>
+                                                    <div>
+                                                        <p class="pos-rel">
+                                                            <input class="styled-checkbox" id="styled-checkbox-1" checked type="checkbox" name="status">
+                                                            <label for="styled-checkbox-1">Status </label>
+                                                        </p>
+                                                        <div class="text-center">
+                                                            <button type="submit" class="btn-primary btn text-center mt-3"><i class="icon-grid icons"></i> Create Project</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            <%- include('partials/footer') %>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#projectAdd').validate({ // initialize the plugin
+                        rules: {
+                            projectName: {
+                                required: true,
+                            },
+                            version: {
+                                required: true,
+                                number: true
+                            },
+                            application_name: {
+                                required: true,
+                                minLength: 1,
+                                maxLength: 12
+                            }
+                        },
+                        messages: {
+                            projectName: {
+                                required: "Project Name is required. <i class='icon-info icons'></i>",
+                            },
+                            version: {
+                                required: "Version is required.  <i class='icon-info icons'></i>",
+                                number: "Version must be a number.  <i class='icon-info icons'></i>",
+                            },
+                            application_name: {
+                                required: "Application name is required. <i class='icon-info icons'></i>",
+                                //minLength: " <i class='icon-info icons'></i>",
+                                //maxLength: " <i class='icon-info icons'></i>",
+                            }
+                        }
+                    });
+                });
+
+            </script>
+            <!--end footer-->
+        </div><!-- end page content -->
+        <!-- end page content -->
+    </div>
+    <!-- end page-wrapper -->
+    <!-- jQuery  -->
+</body>
+
+</html>

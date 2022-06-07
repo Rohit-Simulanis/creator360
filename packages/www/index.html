@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, shrink-to-fit=no">
+  <title>360 WebView</title>
+  <script src="three.min.js"></script>
+  <script src="panolens.min.js"></script>
+  <script src="jquery.js"></script>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #000;
+    }
+
+    #progress {
+      position: absolute;
+      width: 100%;
+      height: 3px;
+    }
+
+    #bar {
+      background-color: #fff;
+      height: 100%;
+      transition: width 0.1s ease;
+    }
+
+    #bar.hide {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .btn {
+      position: absolute;
+      z-index: 1111;
+    }
+
+    .mode {
+      position: absolute;
+      right: 1em;
+      top: 1em;
+    }
+
+    #audioCont {
+      /* display: none */
+    }
+
+    video::-webkit-media-controls-panel {
+      display: flex !important;
+      opacity: 1 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="progress">
+    <div id="bar"></div>
+  </div>
+  <script>
+    var bar = document.querySelector('#bar');
+    var loadindex = 0;
+    var sound;
+
+    var viewer_main = new PANOLENS.Viewer({ output: 'console', reverseDragging: false });
+    var logEvent = ({ type }) => console.log(type);
+    viewer_main.reticle.addEventListener('reticle-start', logEvent);
+    viewer_main.reticle.addEventListener('reticle-update', logEvent);
+    viewer_main.reticle.addEventListener('reticle-end', logEvent);
+    viewer_main.reticle.addEventListener('reticle-ripple-start', logEvent);
+    viewer_main.reticle.addEventListener('reticle-ripple-end', logEvent);
+
+    function onProgressUpdate(event) {
+      var percentage = event.progress.loaded / event.progress.total * 100;
+      bar.style.width = percentage + "%";
+      if (percentage >= 100) {
+        bar.classList.add('hide');
+        setTimeout(function () {
+          bar.style.width = 0;
+        }, 1000);
+      }
+    }
+
+    $.getJSON('data.json', function (json) {
+      $('#progress').trigger('click');
+      $("#progress").focus();
+      if (json) {
+        loadScene(json.data);
+      }
+    })
+
+    function toDataUrl(url, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        var reader = new FileReader();
+        reader.onloadend = function () {
+          callback(reader.result);
+        }
+        reader.readAsDataURL(xhr.response);
+      };
+      xhr.open('GET', url);
+      xhr.responseType = 'blob';
+      xhr.send();
+    }
+
+    function loadScene(json) {
+      var panorama;
+      if (json[loadindex].backgroundtype === "img") {
+        panorama = new PANOLENS.ImagePanorama(`asset/${json[loadindex].background}`);
+      } else {
+        panorama = new PANOLENS.VideoPanorama(`asset/${json[loadindex].background}`, { autoplay: true, loop: true, muted: json[loadindex].ismuted });
+      }
+      // play Audio if audio != ""
+      if (json[loadindex].audio != "") {
+        var listener = new THREE.AudioListener();
+        var audioSphere = new THREE.Mesh();
+        var audioLoader = new THREE.AudioLoader();
+        sound = new THREE.PositionalAudio(listener);
+        toDataUrl(`asset/${json[loadindex].audio}`, function (Base64audio) {
+          audioLoader.load(Base64audio, function (buffer) {
+            audioBuffer = buffer;
+            sound.setBuffer(buffer);
+            sound.setRefDistance(100);
+            sound.setLoop(true);
+            sound.play();
+            console.log("sound")
+            console.log(sound)
+            audioSphere.add(sound);
+            panorama.add(audioSphere);
+          })
+        })
+      }
+
+      json[loadindex].hotspot.map((list, index) => {
+        var infospot
+        toDataUrl(`asset/${list.img}`, function (myBase64) {
+          if (list.img === "") 
+          {
+            infospot = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);
+          } else{
+            infospot = new PANOLENS.Infospot(350, myBase64);
+          }
+          
+          //infospot = new PANOLENS.Infospot(350, myBase64);
+          infospot.position.set(list.x, list.y, list.z);
+          if (list.type === "trigger") {
+            infospot.addEventListener('click', function () {
+              var tempindex = json.find(x => x.id === list.trigger)
+              if (tempindex) {
+                loadindex = json.indexOf(tempindex);
+
+                viewer_main.remove(panorama);
+                var tempcanvas = document.getElementsByClassName('panolens-container')[0].childNodes[0];
+                var tempdiv1 = document.getElementsByClassName('panolens-container')[0].childNodes[1];
+                var tempdiv2 = document.getElementsByClassName('panolens-container')[0].childNodes[2];
+                document.getElementsByClassName('panolens-container')[0].innerHTML = ""
+                document.getElementsByClassName('panolens-container')[0].appendChild(tempcanvas);
+                document.getElementsByClassName('panolens-container')[0].appendChild(tempdiv1);
+                document.getElementsByClassName('panolens-container')[0].appendChild(tempdiv2);
+                if (sound) {
+                  if (sound.isPlaying === true) {
+                    sound.stop();
+                    sound = undefined
+                  }
+                }
+                panorama = undefined
+                loadScene(json)
+              }
+            });
+          } else if (list.type === "image") {
+            var infoImage = document.createElement("IMG");
+            infoImage.setAttribute("src", `asset/${list.image}`);
+            infoImage.setAttribute("width", "304");
+            infoImage.setAttribute("height", "228");
+            infospot.addHoverElement(infoImage, 150);
+          }
+
+          else if (list.type === "video") {
+            var infoVideo = document.createElement('video');
+            infoVideo.controls = true;
+            var source = document.createElement("source");
+            source.src = `asset/${list.video}`;
+            infoVideo.width = "304";
+            infoVideo.height = "228";
+            infoVideo.appendChild(source);
+            infospot.addHoverElement(infoVideo, 150);
+          }
+          else if (list.type === "text") {
+            infospot.addHoverText(list.text)
+
+          }
+          panorama.add(infospot);
+          infospot = undefined
+        })
+
+
+
+        panorama.addEventListener('progress', onProgressUpdate);
+        viewer_main.add(panorama);
+        viewer_main.setPanorama(panorama);
+      });
+      if (json[loadindex].hotspot.length === 0) {
+        panorama.addEventListener('progress', onProgressUpdate);
+        viewer_main.add(panorama);
+        viewer_main.setPanorama(panorama);
+      }
+
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "NPCL"
+  },
+  "basePath": "",
+  "schemes": ["http"],
+  "consumes": [
+    "application/json",
+    "application/x-www-form-urlencoded",
+    "multipart/form-data"
+  ],
+  "produces": ["application/json"],
+  "tags": [
+    {
+      "name": "User",
+      "description": "User App Apis"
+    }
+  ],
+  "paths": {
+    "/api/loginAdmin": {
+      "post": {
+        "tags": ["User"],
+        "description": "User Login",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "description": "Email ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "password",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/api/projects": {
+      "post": {
+        "tags": ["User"],
+        "description": "User Project List",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "name": "login_user_type",
+            "in": "formData",
+            "description": "User Login type (1 or 2 only)",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "login_id",
+            "in": "formData",
+            "description": "User Login id",
+            "required": true,
+            "type": "integer"
+          }
+        ]
+      }
+    },
+    "/api/generateJson": {
+      "post": {
+        "tags": ["User"],
+        "description": "Generate JSON",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "formData",
+            "description": "Project ID",
+            "required": true,
+            "type": "integer"
+          }
+        ]
+      }
+    },
+    "/api/assetZip": {
+      "post": {
+        "tags": ["User"],
+        "description": "Generate Zip of asset folder",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "name": "projectId",
+            "in": "formData",
+            "description": "Project ID",
+            "required": true,
+            "type": "integer"
+          }
+        ]
+      }
+    },
+    "/swagger": {
+      "x-swagger-pipe": "swagger_raw"
+    }
+  },
+
+  "definitions": {
+    "HelloWorldResponse": {
+      "required": ["message"],
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "required": ["message"],
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  
+  <meta name="viewport"
+    content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, shrink-to-fit=no">
+  <title>360 WebView</title>
+  <script src="three.min.js"></script>
+      <script src="panolens.min.js"></script>
+      <script src="jquery.js"></script>
+  <!-- <script src="viveControler.js"></script>
+  <script src="webVR.js"></script>
+  <script src="vrEffect.js"></script>
+  <script src="threeVRControl.js"></script> -->
+  <!-- <script src="recordingWebVrMarket.js"></script> -->
+
+  <script>
+
+  </script>
+  <style>
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #000;
+    }
+
+    #progress {
+      position: absolute;
+      width: 100%;
+      height: 3px;
+    }
+
+    #bar {
+      background-color: #fff;
+      height: 100%;
+      transition: width 0.1s ease;
+    }
+
+    #bar.hide {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .btn {
+      position: absolute;
+      z-index: 1111;
+    }
+
+    .mode {
+      position: absolute;
+      right: 1em;
+      top: 1em;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="progress">
+    <div id="bar"></div>
+  </div>
+
+  <!--<button class="btn" onclick="entervr()">VR</button>-->
+  <script>
+
+    var bar = document.querySelector('#bar');
+    var loadindex = 0;
+
+    var viewer_main = new PANOLENS.Viewer({ output: 'console', reverseDragging: false });
+    var logEvent = ({ type }) => console.log(type);
+    viewer_main.reticle.addEventListener('reticle-start', logEvent);
+    viewer_main.reticle.addEventListener('reticle-update', logEvent);
+    viewer_main.reticle.addEventListener('reticle-end', logEvent);
+    viewer_main.reticle.addEventListener('reticle-ripple-start', logEvent);
+    viewer_main.reticle.addEventListener('reticle-ripple-end', logEvent);
+
+    function entervr() {
+
+    }
+
+    function toDataUrl(url, callback) {
+      if(url ===""){
+        callback("");
+        return;
+      }
+      var xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+      var reader = new FileReader();
+      reader.onloadend = function () {
+      callback(reader.result);
+      }
+      reader.readAsDataURL(xhr.response);
+      };
+      xhr.open('GET', url);
+      xhr.responseType = 'blob';
+      xhr.send();
+    }
+
+    function onProgressUpdate(event) {
+      console.log("on progress")
+      var percentage = event.progress.loaded / event.progress.total * 100;
+      bar.style.width = percentage + "%";
+      if (percentage >= 100) {
+        bar.classList.add('hide');
+        setTimeout(function () {
+          bar.style.width = 0;
+        }, 1000);
+      }
+    }
+
+    $.getJSON('data.json', function (json) {
+      console.log(json)
+      if (json) {
+        loadScene(json.data);
+      }
+    }) 
+
+    function loadScene(json) {
+      console.log("scene loading");
+      var panorama;
+        console.log("json");
+        console.log(json);
+        console.log("loadindex");
+        console.log(loadindex);
+        
+      if (json[loadindex].backgroundtype === "img") {
+        panorama = new PANOLENS.ImagePanorama('asset/' + json[loadindex].background);
+      } else {
+        panorama = new PANOLENS.VideoPanorama('asset/' + json[loadindex].background, { autoplay: true, loop: true, muted: false });
+      }
+      json[loadindex].hotspot.map((list, index) => {
+        var tempdata = list.img === '' ? '':'asset/'+list.img
+
+        toDataUrl(tempdata, function (myBase64) {
+          
+        if (list.img === "") {
+          var infospot = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);
+        }
+        else {
+         // console.log("tempdata")
+         // console.log(myBase64)
+          var infospot = new PANOLENS.Infospot(350, myBase64);
+        }
+
+        //var infospot = new PANOLENS.Infospot(350, 'asset/' + list.img);
+        infospot.position.set(list.x, list.y, list.z);
+        if (list.type === "trigger") {
+          infospot.addEventListener('click', function () {
+            var tempindex = json.find(x => x.id === list.trigger)
+            if (tempindex) {
+              loadindex = json.indexOf(tempindex);
+              console.log(panorama)
+              viewer_main.remove(panorama);
+              
+              var tempcanvas = document.getElementsByClassName('panolens-container')[0].childNodes[0];
+              var tempdiv = document.getElementsByClassName('panolens-container')[0].childNodes[1];
+              document.getElementsByClassName('panolens-container')[0].innerHTML = ""
+              document.getElementsByClassName('panolens-container')[0].appendChild(tempcanvas);
+              document.getElementsByClassName('panolens-container')[0].appendChild(tempdiv);
+              //console.log(`dhfghdkf${obj}kfdjgkdjf${}`)
+
+              panorama = undefined
+              console.log(panorama)
+              loadScene(json)
+            }
+          });
+        } else if (list.type === "image") {
+          var infoImage = document.createElement("IMG");
+          infoImage.setAttribute("src", `asset/${list.image}`);
+          infoImage.setAttribute("width", "304");
+          infoImage.setAttribute("height", "228");
+
+          infospot.addHoverElement(infoImage, 150);
+
+        } else if (list.type === "video") {
+
+          var infoVideo = document.createElement('iframe');
+
+          infoVideo.src = `asset/${list.video}`;
+          infoVideo.width = "304";
+          infoVideo.height = "228";
+          // infoVideo.autoplay = true;
+          infospot.addHoverElement(infoVideo, 150);
+        }
+        else if (list.type === "text") {
+          infospot.addHoverText(list.text)
+
+        }
+        panorama.add(infospot);
+      })
+
+      console.log(viewer_main)
+
+      panorama.addEventListener('progress', onProgressUpdate);
+      viewer_main.add(panorama);
+      viewer_main.setPanorama(panorama);
+
+    })
+
+    }
+    var canvas = document.getElementsByTagName("canvas")[0];
+
+    canvas.addEventListener('click', function (event) {
+      console.log(canvas);
+      console.log(event);
+      let clickedPos = viewer_main.getPosition();
+      console.log(clickedPos);
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html> 
+<html>
+<%- include('partials/header') %>
+   <body>
+      <!-- Top Bar Start -->
+      <%- include('partials/top-bar') %>
+      <!-- Top Bar End -->
+      <div class="page-wrapper">
+         <!-- Left Sidenav -->
+       <%- include('partials/side-bar') %>
+         <!-- end left-sidenav-->
+         <!-- Page Content-->
+         <div class="page-content">
+            <div class="container-fluid">
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            <div class="float-right">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item active">Creator Licenses</li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">License List</h4>
+                        </div>
+                        <!--end page-title-box-->
+                    </div>
+                    <!--end col-->
+                </div><!-- end page title end breadcrumb -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-v-center justify-content-between">
+                                    <h3 class="mt-0">Licenses List</h3>
+                                    <a href="/licenses/add-license" class="btn btn-primary waves-effect m-l-5 mb-3">Add License</a>
+                                </div>
+                                <div class="table-rep-plugin">
+                                    <div class="table-responsive mb-0" data-pattern="priority-columns">
+                                        <table id="tech-companies-1" class="table table-striped mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>S.No</th>
+                                                    <th>License Name</th>
+                                                    <th>License Description</th>
+                                                    <th>Price</th>
+                                                    <th>License Type</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% if(data.length>0) { %>
+                                                <% for(var i=0; i<data.length; i++) {%>
+                                                <tr>
+                                                    <td><%= i+1 %></td>
+                                                    <td><%= data[i].license_name %></td>
+                                                    <td><%= data[i].license_description %></td>
+                                                    <td>Rs. <%= data[i].price %></td>
+                                                    <td><%= data[i].license_type %></td>
+                                                    <td>
+                                                        <% if(data[i].status=="active") { %>
+                                                        <label class="badge badge-success">Active</label>
+                                                        <% } else { %>
+                                                        <label class="badge badge-danger">Inactive</label>
+                                                        <% } %>
+                                                    </td>
+                                                    <!--<td>-->
+                                                    <!--    <a href="#" data-toggle="modal" data-target="#add-project<%= data[i].id %>" class="btn-purple btn btn-sm" title="Add Project"><i class="icon-plus icons"></i> Add Project</a>-->
+                                                    <!--    <a href="/projects/<%= data[i].id %>" title="View Projects List" class="btn-purple btn btn-sm"><i class="icon-eye icons"></i> View Projects</a>-->
+                                                    <!--</td>-->
+                                                    <td>
+                                                        <% if(data[i].status=='inactive') { %>
+                                                        <a href="/licenses/license-status-change/<%= data[i].id %>/active" data-toggle="tooltip" data-original-title="Activate User" onclick="return confirm('Are you sure you want to Activate license??');" class="btn btn-success btn-sm trash" >Activate</a>
+                                                        <% } else { %>
+                                                        <a href="/licenses/license-status-change/<%= data[i].id %>/inactive" data-toggle="tooltip" data-original-title="Deactivate User" onclick="return confirm('Are you sure you want to Dectivate license??');" class="btn btn-danger btn-sm trash">Deactivate</a>
+                                                        <% } %>
+                                                    <!--</td>-->
+                                                    <!--<td>-->
+                                                        <a href="/licenses/edit-license/<%= data[i].id %>" class="btn btn-primary btn-sm trash"  data-toggle="tooltip" data-original-title="Edit" title="Edit"><i class="ti-pencil"></i></a>
+                                                         <a href="/licenses/license-status-change/<%= data[i].id %>/trashed" onclick="return confirm('Are you sure you want to delete this??');" class="btn btn-danger btn-sm trash" data-toggle="tooltip" data-original-title="Edit" title="Delete"><i class="ti-trash"></i></a> 
+                                                    </td>
+                                                </tr>
+                                                <!--add-project-model-->
+                                                <div class="modal theme-model" id="add-project<%= data[i].id %>">
+                                                <div class="modal-dialog modal-dialog-centered modal-md">
+                                                  <div class="modal-content">
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header text-center">
+                                                      <h4 class="modal-title text-light"><i class="icon-grid icons"></i> Add Project</h4>
+                                                      <button type="button" class="close" data-dismiss="modal"><i class="icon-close icons"></i></button>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                <% } %>
+                                                <% } else { %>
+                                                    <tr><td colspan="9" class="text-center">License not found.</td></tr>
+                                                <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- container -->
+           <%- include('partials/footer') %>
+            <!--end footer-->
+         </div><!-- end page content -->
+         <!-- end page content -->
+      </div>
+      <!-- end page-wrapper -->
+      <!-- jQuery  -->
+   </body>
+</html>

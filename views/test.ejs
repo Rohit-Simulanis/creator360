@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+   <%- include('partials/header') %>
+   <body>
+	<button onclick="testAjax()">Click Khanna</button>
+    <button id="test">Click</button>
+      <%- include('partials/footer') %>
+   </body>
+   <script type="text/javascript">
+      $("#test").click(function(){
+        $.ajax({
+          url: 'http://192.168.0.46:3000/projects/ajax',
+          type: 'POST',
+          data: { id: '1' },
+          success: function(res)
+          {
+              console.log(res.msg);
+			  document.getElementById("demo").innerHTML = res.msg;
+          }
+        });
+        
+    });
+	
+	
+	
+	
+	function testAjax() 
+	{
+		//alert("Khanna");
+	  var xhttp = new XMLHttpRequest();
+	  xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+		 document.getElementById("demo").innerHTML = this.responseText;
+		}
+	  };
+	  xhttp.open("POST", "http://192.168.0.46:3000/projects/ajax/", true);
+	  xhttp.send();
+	}
+   </script>
+   
+   <div id="demo">Waiting....</div>
+   
+</html>

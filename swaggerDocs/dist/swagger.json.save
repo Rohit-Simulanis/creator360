@@ -1,0 +1,149 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "Atlas"
+  },
+  "basePath": "",
+  "schemes": ["https","http"],
+  "consumes": [
+    "application/json",
+    "application/x-www-form-urlencoded",
+    "multipart/form-data"
+  ],
+  "produces": ["application/json"],
+  "tags": [
+    {
+      "name": "Admin",
+      "description": "Admin App Apis"
+    },
+    {
+      "name": "Trainer",
+      "description": "Trainer Panel Apis"
+    },
+    {
+      "name": "Employee",
+      "description": "Employee Panel Apis"
+    },
+    {
+      "name": "Teamleader",
+      "description": "Teamlead Panel Apis"
+    }
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": ["Admin"],
+        "description": "Admin Login",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "description": "Email ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "password",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/v1/web/login": {
+      "post": {
+        "tags": ["Trainer"],
+        "description": "User Login",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "description": "Email ID",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "password",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "agree_tc",
+            "in": "formData",
+            "description": "Agreement(Yes=>1, No=>0)",
+            "required": true,
+            "type": "number"
+          }
+        ]
+      }
+    },
+    "/v1/web/homepage/sponsored_list": {
+      "get": {
+        "tags": ["Employee"],
+        "description": "Sponsored Listing",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "new_arrival, sponsored_coil",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/v1/web/logout": {
+      "post": {
+        "tags": ["Teamleader"],
+        "description": "Logout",
+        "consumes": ["application/x-www-form-urlencoded"],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "header",
+            "description": "Access Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "user_id",
+            "in": "formData",
+            "description": "user_id",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      }
+    },
+    "/swagger": {
+      "x-swagger-pipe": "swagger_raw"
+    }
+  },
+
+  "definitions": {
+    "HelloWorldResponse": {
+      "required": ["message"],
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      } 
+    },
+    "ErrorResponse": {
+      "required": ["message"],
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

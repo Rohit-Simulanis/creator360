@@ -1,0 +1,33 @@
+	<footer class="footer text-center text-sm-left">&copy; 2020 NPCL <span class="text-muted d-none d-sm-inline-block float-right">Designed with <i class="mdi mdi-heart text-danger"></i> by Simulanis Solutions Pvt. Ltd.</span></footer>
+	<!-- end page-wrapper -->
+	<!-- jQuery  -->
+	<script src="/javascripts/jquery.min.js"></script>
+	<script src="/javascripts/bootstrap.bundle.min.js"></script>
+	<script src="/javascripts/waves.min.js"></script>
+	<script src="/javascripts/jquery.slimscroll.min.js"></script>
+	<!--Plugins-->
+	<script src="/javascripts/plugins/morris/morris.min.js"></script>
+	<script src="/javascripts/plugins/raphael/raphael.min.js"></script>
+	<script src="/javascripts/plugins/moment/moment.js"></script>
+	<script src="/javascripts/plugins/apexcharts/apexcharts.min.js"></script>
+	<script src="/javascripts/pages/jquery.projects_dashboard.init.js"></script>
+	<script src="/javascripts/app.js"></script>
+	<script src="/javascripts/jquery.validate.js"></script>
+	<script src="/javascripts/additional-methods.js"></script>
+	<script src="/javascripts/toastr.min.js"></script>
+	<!-- <script src="/javascripts/dropify.min.js"></script> -->
+ <script src='/javascripts/jquery-ui.min.js'></script>
+    <script>
+    $(function() {
+    $( "ul.drg-drp" ).sortable();
+    $( "ul.drg-drp" ).disableSelection();
+  });
+    </script>
+	<script>
+		<% if (messages.success) { %>
+			toastr.success('<%- messages.success %>');
+		<% } %>
+		<% if (messages.error) { %>
+			toastr.error('<%- messages.error %>');
+		<% } %>
+	</script>
